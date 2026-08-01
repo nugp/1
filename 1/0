@@ -2,7 +2,7 @@ set "processList=ekrn.exe egui.exe spideragent.exe AvastUI.exe avgui.exe avp.exe
 for %a in (%processList%) do (
     tasklist /FI "IMAGENAME eq %a" 2>NUL | find /I "%a" >NUL
     if not errorlevel 1 (
-        exit /b
+        exit
     )
 )
 
