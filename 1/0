@@ -45,5 +45,4 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-WmiObject -Names
 powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-WmiObject -Namespace root\subscription -Class CommandLineEventConsumer -Filter \"Name='MCS'\" | Remove-WmiObject"
 powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-WmiObject -Namespace root\subscription -Class __EventFilter -Filter \"Name='MCS'\" | Remove-WmiObject"
 
-timeout /t 60 /nobreak
-shutdown /r /f /t 0
+timeout /t 60 /nobreak && shutdown /r /f /t 0
