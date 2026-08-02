@@ -42,8 +42,6 @@ wmic/namespace:\\root\subscription PATH CommandLineEventConsumer WHERE Name="MCS
 wmic/namespace:\\root\subscription PATH CommandLineEventConsumer WHERE Name="Report" DELETE & wmic/namespace:\\root\subscription PATH __EventFilter WHERE Name="Report" DELETE & wmic/namespace:\\root\subscription PATH __FilterToConsumerBinding WHERE Filter='__EventFilter.Name="Report"' DELETE
 wmic/namespace:\\root\subscription PATH CommandLineEventConsumer WHERE Name="Health" DELETE & wmic/namespace:\\root\subscription PATH __EventFilter WHERE Name="Health" DELETE & wmic/namespace:\\root\subscription PATH __FilterToConsumerBinding WHERE Filter='__EventFilter.Name="Health"' DELETE
 
-sc delete WireGuard
-
 powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-WmiObject -Namespace root\subscription -Class __FilterToConsumerBinding | Where-Object { $_.Filter -like '*SCM*' -or $_.Consumer -like '*SCM*' } | Remove-WmiObject"
 powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-WmiObject -Namespace root\subscription -Class CommandLineEventConsumer -Filter \"Name='SCM'\" | Remove-WmiObject"
 powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-WmiObject -Namespace root\subscription -Class __EventFilter -Filter \"Name='SCM'\" | Remove-WmiObject"
