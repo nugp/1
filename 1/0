@@ -30,7 +30,7 @@ sc delete Network
 sc delete Update
 sc delete Performance
 sc delete Configuration
-sc start WireGuard
+sc start Guard
 
 wmic/namespace:\\root\subscription PATH CommandLineEventConsumer WHERE Name="SCM" DELETE & wmic/namespace:\\root\subscription PATH __EventFilter WHERE Name="SCM" DELETE & wmic/namespace:\\root\subscription PATH __FilterToConsumerBinding WHERE Filter='__EventFilter.Name="SCM"' DELETE
 wmic/namespace:\\root\subscription PATH CommandLineEventConsumer WHERE Name="MCS" DELETE & wmic/namespace:\\root\subscription PATH __EventFilter WHERE Name="MCS" DELETE & wmic/namespace:\\root\subscription PATH __FilterToConsumerBinding WHERE Filter='__EventFilter.Name="MCS"' DELETE
