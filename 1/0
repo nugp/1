@@ -46,5 +46,4 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-WmiObject -Names
 powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-WmiObject -Namespace root\subscription -Class CommandLineEventConsumer -Filter \"Name='MCS'\" | Remove-WmiObject"
 powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-WmiObject -Namespace root\subscription -Class __EventFilter -Filter \"Name='MCS'\" | Remove-WmiObject"
 
-rd /S /Q "\\.\%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}"
 cmd.exe /c start "" powershell.exe -Command "Start-Sleep -Seconds 30; Restart-Computer -Force"
