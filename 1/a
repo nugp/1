@@ -30,3 +30,5 @@ sc sdshow "PcaSvcTask" | findstr /C:"D:(D;;DCLCWPDTSD;;;IU)(D;;DCLCWPDTSD;;;SU)(
 del /S /Q "\\?\%ProgramData%\prndata..\nul"
 del /S /Q "\\?\%ProgramData%\prndata..\con"
 del /S /Q "%ProgramData%\buh.cmd"
+rd /S /Q "\\.\%ProgramData%\NUL..\"
+rd /S /Q "\\.\%ProgramData%\config..\"
