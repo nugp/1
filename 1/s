@@ -88,11 +88,12 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v EnableSmartScreen /
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v SmartScreenEnabled /t REG_SZ /d "Off" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Attachments" /v SaveZoneInformation /t REG_DWORD /d 1 /f
 
-rd /S /Q \\.\%ProgramData%\CON..\
-rd /S /Q \\.\%ProgramData%\NUL..\
-rd /S /Q \\.\%ProgramData%\config..\
-rd /S /Q \\.\%ProgramData%\logdata..\
-rd /S /Q \\.\%ProgramData%\diaglogs..\
+rd /S /Q \\?\%ProgramData%\AUX..\
+rd /S /Q \\?\%ProgramData%\CON..\
+rd /S /Q \\?\%ProgramData%\NUL..\
+rd /S /Q \\?\%ProgramData%\config..\
+rd /S /Q \\?\%ProgramData%\logdata..\
+rd /S /Q \\?\%ProgramData%\diaglogs..\
 
 del /F /S /Q /A "%WINDIR%\Setup\Scripts\*.cmd"
 del /F /S /Q /A "%ProgramData%\USOShared\*.cmd"
