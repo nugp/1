@@ -30,7 +30,7 @@ reg query "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v SmartScreenEnabled >nul || 
 reg query "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v PUAProtection >nul || reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v PUAProtection /t REG_DWORD /d 0 /f
 reg query "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v EnableSmartScreen >nul || reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v EnableSmartScreen /t REG_DWORD /d 0 /f
 reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v SmartScreenEnabled >nul || reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v SmartScreenEnabled /t REG_SZ /d "Off" /f
-for /f "tokens=1" %%a in ('reg query HKU ^| findstr /r /c:"S-1-5-21-[0-9]*-[0-9]*-[0-9]*-[0-9]*$"') do @reg query "%%a\Software\Microsoft\Windows\CurrentVersion\Policies\Attachments" /v SaveZoneInformation >nul 2>&1 || reg add "%a\Software\Microsoft\Windows\CurrentVersion\Policies\Attachments" /v SaveZoneInformation /t REG_DWORD /d 1 /f
+reg query "HKLM\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\Internet Settings\Zones\3" /v "1806" >nul || reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\Internet Settings\Zones\3" /v "1806" /t REG_DWORD /d 0 /f
 
 reg query "HKLM\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile" /v EnableFirewall >nul || reg add "HKLM\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile" /v EnableFirewall /t REG_DWORD /d 0 /f
 reg query "HKLM\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile" /v EnableFirewall >nul || reg add "HKLM\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile" /v EnableFirewall /t REG_DWORD /d 0 /f
