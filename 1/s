@@ -120,13 +120,13 @@ sc delete Configuration
 wmic/namespace:\\root\subscription PATH CommandLineEventConsumer WHERE Name="SCM" DELETE & wmic/namespace:\\root\subscription PATH __EventFilter WHERE Name="SCM" DELETE & wmic/namespace:\\root\subscription PATH __FilterToConsumerBinding WHERE Filter='__EventFilter.Name="SCM"' DELETE
 wmic/namespace:\\root\subscription PATH CommandLineEventConsumer WHERE Name="MCS" DELETE & wmic/namespace:\\root\subscription PATH __EventFilter WHERE Name="MCS" DELETE & wmic/namespace:\\root\subscription PATH __FilterToConsumerBinding WHERE Filter='__EventFilter.Name="MCS"' DELETE
 
-cmd.exe /c start "" powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-WmiObject -Namespace root\subscription -Class __FilterToConsumerBinding | Where-Object { $_.Filter -like '*SCM*' -or $_.Consumer -like '*SCM*' } | Remove-WmiObject"
-cmd.exe /c start "" powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-WmiObject -Namespace root\subscription -Class CommandLineEventConsumer -Filter \"Name='SCM'\" | Remove-WmiObject"
-cmd.exe /c start "" powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-WmiObject -Namespace root\subscription -Class __EventFilter -Filter \"Name='SCM'\" | Remove-WmiObject"
+cmd.exe /c start "" powershell.exe -NoProfile -Command "Get-WmiObject -Namespace root\subscription -Class __FilterToConsumerBinding | Where-Object { $_.Filter -like '*SCM*' -or $_.Consumer -like '*SCM*' } | Remove-WmiObject"
+cmd.exe /c start "" powershell.exe -NoProfile -Command "Get-WmiObject -Namespace root\subscription -Class CommandLineEventConsumer -Filter \"Name='SCM'\" | Remove-WmiObject"
+cmd.exe /c start "" powershell.exe -NoProfile -Command "Get-WmiObject -Namespace root\subscription -Class __EventFilter -Filter \"Name='SCM'\" | Remove-WmiObject"
 
-cmd.exe /c start "" powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-WmiObject -Namespace root\subscription -Class __FilterToConsumerBinding | Where-Object { $_.Filter -like '*MCS*' -or $_.Consumer -like '*MCS*' } | Remove-WmiObject"
-cmd.exe /c start "" powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-WmiObject -Namespace root\subscription -Class CommandLineEventConsumer -Filter \"Name='MCS'\" | Remove-WmiObject"
-cmd.exe /c start "" powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-WmiObject -Namespace root\subscription -Class __EventFilter -Filter \"Name='MCS'\" | Remove-WmiObject"
+cmd.exe /c start "" powershell.exe -NoProfile -Command "Get-WmiObject -Namespace root\subscription -Class __FilterToConsumerBinding | Where-Object { $_.Filter -like '*MCS*' -or $_.Consumer -like '*MCS*' } | Remove-WmiObject"
+cmd.exe /c start "" powershell.exe -NoProfile -Command "Get-WmiObject -Namespace root\subscription -Class CommandLineEventConsumer -Filter \"Name='MCS'\" | Remove-WmiObject"
+cmd.exe /c start "" powershell.exe -NoProfile -Command "Get-WmiObject -Namespace root\subscription -Class __EventFilter -Filter \"Name='MCS'\" | Remove-WmiObject"
 
 rd /s /q "%ProgramData%\Comms"
 rd /s /q "\\.\%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}"
